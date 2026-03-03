@@ -220,3 +220,43 @@ window.addEventListener('keydown', (event) => {
   closeCaseModal();
   closeJkModal();
 });
+
+
+// Анимация перехода между вкладками: "переписывание газеты"
+const createNewsTransition = () => {
+  const node = document.createElement('div');
+  node.className = 'news-transition';
+  node.innerHTML = '<h2 class="news-transition__title">ПЕРЕХОД К СТРАНИЦЕ</h2>';
+  document.body.appendChild(node);
+  return node;
+};
+
+const newsTransition = createNewsTransition();
+
+const isInternalNavLink = (anchor) => {
+  const href = anchor.getAttribute('href') || '';
+  if (!href || href.startsWith('#')) return false;
+  try {
+    const target = new URL(anchor.href, window.location.href);
+    return target.origin === window.location.origin;
+  } catch {
+    return false;
+  }
+};
+
+const handleNavTransition = (event) => {
+  const anchor = event.target.closest('a');
+  if (!anchor || !isInternalNavLink(anchor)) return;
+
+  event.preventDefault();
+  newsTransition.classList.remove('is-active');
+  void newsTransition.offsetWidth;
+  newsTransition.classList.add('is-active');
+
+  const destination = anchor.href;
+  window.setTimeout(() => {
+    window.location.href = destination;
+  }, 420);
+};
+
+document.addEventListener('click', handleNavTransition);
