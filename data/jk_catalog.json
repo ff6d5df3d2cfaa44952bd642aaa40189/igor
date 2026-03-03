@@ -1,0 +1,36 @@
+{
+  "updated_at": "2026-03-03T21:55:51.799823+00:00",
+  "source_url": "https://pronovostroy.ru/",
+  "source_ok": false,
+  "error": "<urlopen error Tunnel connection failed: 403 Forbidden>",
+  "count": 3,
+  "items": [
+    {
+      "title": "ЖК Прокшино",
+      "source_url": "https://pronovostroy.ru/",
+      "location": "Москва / МО",
+      "price_hint": "уточняется",
+      "deadline_hint": "уточняется",
+      "source": "pronovostroy.ru",
+      "slug": "zhk-prokshino"
+    },
+    {
+      "title": "ЖК Скандинавия",
+      "source_url": "https://pronovostroy.ru/",
+      "location": "Москва / МО",
+      "price_hint": "уточняется",
+      "deadline_hint": "уточняется",
+      "source": "pronovostroy.ru",
+      "slug": "zhk-skandinaviya"
+    },
+    {
+      "title": "ЖК Саларьево Парк",
+      "source_url": "https://pronovostroy.ru/",
+      "location": "Москва / МО",
+      "price_hint": "уточняется",
+      "deadline_hint": "уточняется",
+      "source": "pronovostroy.ru",
+      "slug": "zhk-salarevo-park"
+    }
+  ]
+}
