@@ -1,6 +1,11 @@
-document.getElementById('year').textContent = new Date().getFullYear();
+const yearElement = document.getElementById('year');
+if (yearElement) yearElement.textContent = new Date().getFullYear();
 
-document.querySelector('.lead-form').addEventListener('submit', (event) => {
-  event.preventDefault();
-  alert('Спасибо! Мы свяжемся с вами в течение 15 минут.');
-});
+const form = document.querySelector('.lead-form');
+if (form) {
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    alert('Спасибо! Специалист свяжется с вами в ближайшее время.');
+    form.reset();
+  });
+}

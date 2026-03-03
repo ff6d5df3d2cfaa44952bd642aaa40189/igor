@@ -3,128 +3,154 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Проверка новостройки перед покупкой</title>
+    <title>Экспертная приёмка квартир в новостройках</title>
     <meta
       name="description"
-      content="Профессиональный аудит квартиры в новостройке: техническая экспертиза, отчёт с фото и сопровождение до устранения дефектов."
+      content="Профессиональная приёмка квартиры в новостройке: выявляем дефекты, готовим отчёт и сопровождаем до устранения замечаний."
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <header class="topbar">
-      <div class="container topbar__inner">
-        <a class="logo" href="#">Аудит Новостройки</a>
-        <nav class="nav">
+    <header class="header">
+      <div class="container header__inner">
+        <a class="logo" href="#top">ЭкспертПриёмка</a>
+        <nav class="menu">
           <a href="#services">Услуги</a>
-          <a href="#steps">Как работаем</a>
-          <a href="#reviews">Отзывы</a>
-          <a href="#contact">Контакты</a>
+          <a href="#benefits">Преимущества</a>
+          <a href="#process">Этапы</a>
+          <a href="#faq">FAQ</a>
+          <a href="#contacts">Контакты</a>
         </nav>
-        <a class="btn btn--small" href="#contact">Оставить заявку</a>
+        <a class="button button--small" href="#lead">Оставить заявку</a>
       </div>
     </header>
 
-    <section class="hero">
-      <div class="container hero__grid">
+    <section class="hero" id="top">
+      <div class="container hero__layout">
         <div>
-          <p class="badge">Экспертиза квартир и приёмка от 1 дня</p>
-          <h1>Найдём скрытые дефекты в вашей новостройке до подписания акта</h1>
-          <p class="hero__text">
-            Проверяем отделку, инженерные системы, геометрию стен и окон. Готовим
-            официальный отчёт с фотофиксацией и помогаем добиться устранения замечаний у
-            застройщика.
+          <p class="hero__label">Технический аудит и приёмка квартир</p>
+          <h1>Найдём дефекты до подписания акта и поможем отстоять ваши права</h1>
+          <p class="hero__desc">
+            Инженерная проверка квартиры в новостройке по чек-листу, инструментальный контроль,
+            фотофиксация и понятный отчёт в день осмотра.
           </p>
-          <div class="hero__actions">
-            <a class="btn" href="#contact">Получить консультацию</a>
-            <a class="btn btn--ghost" href="#services">Смотреть услуги</a>
+
+          <div class="hero__cta">
+            <a class="button" href="#lead">Получить консультацию</a>
+            <a class="button button--outline" href="#services">Посмотреть услуги</a>
           </div>
-          <ul class="hero__facts">
-            <li>✔ Более 3 000 проверенных квартир</li>
-            <li>✔ Отчёт в день осмотра</li>
-            <li>✔ Работаем по Москве и области</li>
+
+          <ul class="hero__list">
+            <li>Более 3 500 проверенных квартир</li>
+            <li>Выезд по Москве и Московской области</li>
+            <li>Отчёт с рекомендациями в тот же день</li>
           </ul>
         </div>
-        <div class="hero-card">
-          <h2>Бесплатный экспресс-разбор</h2>
-          <p>
-            Оставьте контакты — перезвоним за 15 минут, расскажем, что важно проверить именно
-            в вашем ЖК.
-          </p>
-          <form class="lead-form" id="contact">
+
+        <aside class="lead-card" id="lead">
+          <h2>Рассчитаем стоимость за 5 минут</h2>
+          <p>Оставьте контакты — подберём формат проверки под ваш объект и срок сдачи.</p>
+          <form class="lead-form">
             <input type="text" placeholder="Ваше имя" required />
             <input type="tel" placeholder="Телефон" required />
-            <button type="submit" class="btn">Отправить заявку</button>
+            <input type="text" placeholder="Название ЖК" />
+            <button class="button" type="submit">Получить расчёт</button>
           </form>
           <small>Нажимая кнопку, вы соглашаетесь с обработкой персональных данных.</small>
-        </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="stats">
+      <div class="container stats__grid">
+        <article><strong>12+</strong><span>лет в приёмке и технадзоре</span></article>
+        <article><strong>95%</strong><span>замечаний устраняет застройщик</span></article>
+        <article><strong>24 ч</strong><span>на подготовку полного отчёта</span></article>
+        <article><strong>4.9/5</strong><span>средняя оценка клиентов</span></article>
       </div>
     </section>
 
     <main>
       <section class="section" id="services">
         <div class="container">
-          <h2>Услуги</h2>
-          <p class="section__lead">Подберём формат проверки под ваш этап сделки.</p>
-          <div class="cards">
+          <h2>Наши услуги</h2>
+          <p class="section__text">
+            Подбираем решение под стадию сделки: от первичной приёмки до повторного выезда.
+          </p>
+          <div class="cards cards--3">
             <article class="card">
               <h3>Приёмка квартиры с отделкой</h3>
-              <p>Проверка более 120 параметров: стены, пол, окна, двери, вентиляция, электрика.</p>
-              <strong>от 7 500 ₽</strong>
+              <p>Контроль геометрии, отделочных работ, окон, дверей, сантехники и электрики.</p>
+              <strong>от 7 000 ₽</strong>
             </article>
             <article class="card">
-              <h3>Приёмка без отделки</h3>
-              <p>Контроль геометрии, инженерных вводов, оконных блоков, качества остекления.</p>
-              <strong>от 6 000 ₽</strong>
+              <h3>Приёмка квартиры без отделки</h3>
+              <p>Проверка конструктивных элементов, инженерных вводов, стяжки и оконных узлов.</p>
+              <strong>от 5 500 ₽</strong>
             </article>
             <article class="card">
-              <h3>Технический аудит перед ремонтом</h3>
-              <p>Выявление рисков, рекомендации для бригады, проверка смежных зон и узлов.</p>
-              <strong>от 9 500 ₽</strong>
+              <h3>Повторная приёмка</h3>
+              <p>Проверяем устранение замечаний и сопровождаем до подписания итогового акта.</p>
+              <strong>от 4 500 ₽</strong>
             </article>
           </div>
         </div>
       </section>
 
-      <section class="section section--alt" id="steps">
+      <section class="section section--gray" id="benefits">
         <div class="container">
-          <h2>Как проходит проверка</h2>
-          <div class="steps">
-            <div class="step"><span>1</span>Согласовываем дату и формат осмотра</div>
-            <div class="step"><span>2</span>Инженер выезжает на объект с оборудованием</div>
-            <div class="step"><span>3</span>Фиксируем дефекты в чек-листе и фотоотчёте</div>
-            <div class="step"><span>4</span>Передаём документы и план устранения</div>
+          <h2>Почему выбирают нас</h2>
+          <div class="cards cards--4">
+            <article class="card"><h3>Официальный отчёт</h3><p>Подробный документ с фото и ссылками на нормы.</p></article>
+            <article class="card"><h3>Проф. оборудование</h3><p>Лазерный нивелир, тепловизор, влагомер и измерители микроклимата.</p></article>
+            <article class="card"><h3>Сильная экспертиза</h3><p>Инженеры с опытом технадзора и строительной экспертизы.</p></article>
+            <article class="card"><h3>Поддержка после осмотра</h3><p>Консультируем до полного устранения дефектов.</p></article>
           </div>
         </div>
       </section>
 
-      <section class="section" id="reviews">
+      <section class="section" id="process">
         <div class="container">
-          <h2>Отзывы клиентов</h2>
-          <div class="reviews">
-            <blockquote>
-              «Нашли 27 замечаний, которые мы бы сами не заметили. Застройщик всё исправил за 2
-              недели.»
-              <cite>— Анна, ЖК “Скандинавия”</cite>
-            </blockquote>
-            <blockquote>
-              «Очень чётко и по делу. Отчёт с фото отправили в тот же день, приняли квартиру без
-              нервов.»
-              <cite>— Дмитрий, ЖК “Символ”</cite>
-            </blockquote>
+          <h2>Как проходит работа</h2>
+          <ol class="timeline">
+            <li><span>1</span><div><h3>Заявка и консультация</h3><p>Уточняем параметры квартиры, дату и цели проверки.</p></div></li>
+            <li><span>2</span><div><h3>Выезд инженера</h3><p>Проводим осмотр по чек-листу и инструментальные замеры.</p></div></li>
+            <li><span>3</span><div><h3>Фиксация замечаний</h3><p>Фото/видео, описание дефектов и правовых оснований.</p></div></li>
+            <li><span>4</span><div><h3>Отчёт и сопровождение</h3><p>Передаём документы и подсказываем, как общаться с застройщиком.</p></div></li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="section section--dark" id="faq">
+        <div class="container">
+          <h2>Частые вопросы</h2>
+          <div class="faq">
+            <details open>
+              <summary>Сколько длится приёмка?</summary>
+              <p>Обычно от 1 до 2.5 часов в зависимости от площади и объёма проверки.</p>
+            </details>
+            <details>
+              <summary>Можно ли принять квартиру без меня?</summary>
+              <p>Да, при наличии доверенности специалист может присутствовать и представлять ваши интересы.</p>
+            </details>
+            <details>
+              <summary>Что делать, если застройщик отказывается исправлять?</summary>
+              <p>Подскажем порядок претензионной работы и передадим комплект доказательных материалов.</p>
+            </details>
           </div>
         </div>
       </section>
     </main>
 
-    <footer class="footer">
+    <footer class="footer" id="contacts">
       <div class="container footer__inner">
         <div>
-          <strong>Аудит Новостройки</strong>
-          <p>Профессиональная приёмка квартир и техническое сопровождение.</p>
+          <strong>ЭкспертПриёмка</strong>
+          <p>Профессиональная приёмка квартир и техническое сопровождение покупателей.</p>
         </div>
         <div>
-          <p>Телефон: +7 (999) 123-45-67</p>
-          <p>Email: hello@audit-novostroy.ru</p>
+          <p>Телефон: +7 (999) 000-00-00</p>
+          <p>Email: info@expert-priemka.ru</p>
           <p>© <span id="year"></span> Все права защищены</p>
         </div>
       </div>
