@@ -63,6 +63,14 @@
         </div>
       </section>
 
+      
+      <section class="panel" id="jk-home-catalog">
+        <h2><span>СДАННЫЕ НОВОСТРОЙКИ</span> Москва и Московская область</h2>
+        <p>Каталог подтягивается с pronovostroy.ru/novostroyki-sdannye/ и обновляется автоматически раз в день.</p>
+        <div class="grid grid-3" id="jk-catalog-home-list"></div>
+        <p class="muted" id="jk-catalog-home-status"></p>
+      </section>
+
       <section class="panel">
         <h2><span>ДОРОЖНАЯ КАРТА</span> из 5 шагов</h2>
         <ol class="steps">
@@ -97,6 +105,23 @@
         <ul id="case-checklist" class="modal__checklist"></ul>
         <p id="case-issues"></p>
         <div id="case-gallery" class="modal__gallery"></div>
+      </div>
+    </div>
+
+
+    <div class="modal" id="jk-modal" aria-hidden="true">
+      <div class="modal__backdrop" data-close-jk-modal></div>
+      <div class="modal__content" role="dialog" aria-modal="true" aria-labelledby="jk-modal-title">
+        <button class="modal__close" type="button" data-close-jk-modal aria-label="Закрыть">×</button>
+        <h3 id="jk-modal-title">ЖК</h3>
+        <div class="image-strip">
+          <figure class="image-card"><img id="jk-modal-image" src="" alt="ЖК" /></figure>
+          <article class="card">
+            <p><strong>Застройщик:</strong> <span id="jk-modal-developer"></span></p>
+            <p><strong>Локация:</strong> <span id="jk-modal-location"></span></p>
+            <p><a id="jk-modal-link" class="text-link" href="#" target="_blank" rel="noopener">Открыть на источнике</a></p>
+          </article>
+        </div>
       </div>
     </div>
 

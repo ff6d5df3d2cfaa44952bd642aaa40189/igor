@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-"""Парсер каталога ЖК с pronovostroy.ru + генератор страниц jk/auto-*.html и jk/index.html.
+"""Обновление каталога сданных новостроек с pronovostroy.ru.
 
-Запуск:
-  python3 tools/update_jk_catalog.py
-
-Если сайт недоступен, скрипт не ломает сайт и использует последний data/jk_catalog.json.
+Источник: https://pronovostroy.ru/novostroyki-sdannye/
+Результат:
+- data/jk_catalog.json
+- jk/auto-*.html
+- jk/index.html
 """
 from __future__ import annotations
 
@@ -12,16 +13,15 @@ import json
 import re
 from dataclasses import dataclass, asdict
 from datetime import datetime, timezone
-from html import unescape, escape
+from html import escape, unescape
 from pathlib import Path
-from typing import Iterable
 from urllib.parse import urljoin
 from urllib.request import Request, urlopen
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA_FILE = ROOT / "data" / "jk_catalog.json"
 JK_DIR = ROOT / "jk"
-SOURCE_URL = "https://pronovostroy.ru/"
+SOURCE_URL = "https://pronovostroy.ru/novostroyki-sdannye/"
 UA = "Mozilla/5.0 (compatible; AuditNovostroyBot/1.0; +https://auditnovostroy.ru)"
 
 
@@ -29,9 +29,11 @@ UA = "Mozilla/5.0 (compatible; AuditNovostroyBot/1.0; +https://auditnovostroy.ru
 class JKItem:
     title: str
     source_url: str
+    developer: str = "Застройщик уточняется"
     location: str = "Москва / МО"
+    image_url: str = "https://images.unsplash.com/photo-1460317442991-0ec209397118?auto=format&fit=crop&w=1200&q=60"
     price_hint: str = "уточняется"
-    deadline_hint: str = "уточняется"
+    deadline_hint: str = "сдан"
     source: str = "pronovostroy.ru"
 
     @property
@@ -62,68 +64,113 @@ def strip_tags(html: str) -> str:
     return re.sub(r"<[^>]+>", "", html)
 
 
-def extract_candidates(html: str, base_url: str) -> list[JKItem]:
-    # Универсально по ссылкам на карточки ЖК
-    link_pattern = re.compile(r'<a[^>]+href=["\']([^"\']+)["\'][^>]*>(.*?)</a>', re.I | re.S)
+def parse_cards(html: str) -> list[JKItem]:
+    # Блоки карточек на листингах обычно содержат ссылку, заголовок, картинку и/или застройщика.
+    anchors = re.finditer(r'<a[^>]+href=["\'](?P<href>[^"\']+)["\'][^>]*>(?P<body>.*?)</a>', html, re.I | re.S)
+
     items: list[JKItem] = []
-    seen: set[str] = set()
+    seen = set()
 
-    for href, raw_text in link_pattern.findall(html):
-        text = unescape(strip_tags(raw_text)).strip()
-        text = re.sub(r"\s+", " ", text)
-        full_url = urljoin(base_url, href)
-        low_href = href.lower()
+    for m in anchors:
+        href = m.group("href")
+        body = m.group("body")
+        full = urljoin(SOURCE_URL, href)
+        low = href.lower()
 
-        is_jk_link = any(k in low_href for k in ["/novostroy", "/zhk", "novostroyki", "jk-"])
-        looks_like_jk_name = bool(re.search(r"\b(жк|жилой комплекс)\b", text.lower())) or (len(text) > 7 and text[0].isupper())
-
-        if not (is_jk_link and looks_like_jk_name):
-            continue
-        if len(text) < 4 or len(text) > 120:
-            continue
-        if full_url in seen:
+        if not any(k in low for k in ["/novostroy", "/zhk", "novostroyki", "/jk-"]):
             continue
 
-        # Берём небольшой контекст вокруг ссылки и ищем подсказки показателей
-        idx = html.find(href)
-        context = html[max(0, idx - 600): idx + 600] if idx >= 0 else ""
+        text = unescape(strip_tags(body))
+        text = re.sub(r"\s+", " ", text).strip()
 
-        price_match = re.search(r"(от\s*[\d\s,.]+\s*(?:млн|₽|руб))", context, re.I)
-        deadline_match = re.search(r"(сдач[аи][^<\n]{0,40})", context, re.I)
-        location_match = re.search(r"(москва|московск[а-я ]+область|мо)", context, re.I)
+        # Вытаскиваем кандидат названия
+        title = ""
+        title_match = re.search(r"(ЖК\s+[A-Za-zА-Яа-я0-9\-\s«»\"()]+)", text, re.I)
+        if title_match:
+            title = title_match.group(1).strip(' -–|')
+        else:
+            if 4 < len(text) < 120:
+                title = text.split("|")[0].strip(' -–')
+
+        if len(title) < 4:
+            continue
+        if full in seen:
+            continue
+
+        pos = m.start()
+        context = html[max(0, pos - 1000): pos + 1000]
+
+        # Застройщик
+        dev = "Застройщик уточняется"
+        dev_m = re.search(r"(?:застройщик|девелопер)\s*[:\-]?\s*([A-Za-zА-Яа-я0-9«»\"\-\s]{3,80})", context, re.I)
+        if dev_m:
+            dev = dev_m.group(1).strip(' .|,')
+
+        # Локация: только Москва/МО
+        loc = "Москва / МО"
+        if re.search(r"московск[а-я\s]+област", context, re.I):
+            loc = "Московская область"
+        elif re.search(r"москва", context, re.I):
+            loc = "Москва"
+
+        # Цена/статус
+        price_m = re.search(r"(от\s*[\d\s,.]+\s*(?:млн|₽|руб))", context, re.I)
+        price = price_m.group(1).strip() if price_m else "уточняется"
+
+        # Картинка
+        img = ""
+        img_m = re.search(r'<img[^>]+src=["\']([^"\']+)["\']', body, re.I)
+        if not img_m:
+            img_m = re.search(r'<img[^>]+src=["\']([^"\']+)["\']', context, re.I)
+        if img_m:
+            img = urljoin(SOURCE_URL, img_m.group(1))
+
+        if not img:
+            img = "https://images.unsplash.com/photo-1460317442991-0ec209397118?auto=format&fit=crop&w=1200&q=60"
 
         items.append(
             JKItem(
-                title=text,
-                source_url=full_url,
-                location=location_match.group(1).strip() if location_match else "Москва / МО",
-                price_hint=price_match.group(1).strip() if price_match else "уточняется",
-                deadline_hint=deadline_match.group(1).strip() if deadline_match else "уточняется",
+                title=title,
+                source_url=full,
+                developer=dev,
+                location=loc,
+                image_url=img,
+                price_hint=price,
+                deadline_hint="сдан",
             )
         )
-        seen.add(full_url)
+        seen.add(full)
 
-    # Чистка дублей по названию
+    # Фильтруем только Москва/МО и убираем дубли по названию
     dedup: dict[str, JKItem] = {}
     for item in items:
-        key = item.title.lower()
-        dedup[key] = item
+        if item.location not in {"Москва", "Московская область", "Москва / МО"}:
+            continue
+        dedup[item.title.lower()] = item
 
-    # Ограничим объём
-    return list(dedup.values())[:120]
+    return list(dedup.values())[:150]
 
 
-def load_previous_items() -> list[JKItem]:
+def load_prev() -> list[JKItem]:
     if not DATA_FILE.exists():
         return []
     data = json.loads(DATA_FILE.read_text())
-    items = []
-    for obj in data.get("items", []):
-        items.append(JKItem(**{k: obj.get(k, "") for k in ["title", "source_url", "location", "price_hint", "deadline_hint", "source"]}))
-    return items
+    return [
+        JKItem(
+            title=i.get("title", ""),
+            source_url=i.get("source_url", SOURCE_URL),
+            developer=i.get("developer", "Застройщик уточняется"),
+            location=i.get("location", "Москва / МО"),
+            image_url=i.get("image_url") or "https://images.unsplash.com/photo-1460317442991-0ec209397118?auto=format&fit=crop&w=1200&q=60",
+            price_hint=i.get("price_hint", "уточняется"),
+            deadline_hint=i.get("deadline_hint", "сдан"),
+            source=i.get("source", "pronovostroy.ru"),
+        )
+        for i in data.get("items", [])
+    ]
 
 
-def save_data(items: list[JKItem], source_ok: bool, error: str | None = None) -> None:
+def save_data(items: list[JKItem], source_ok: bool, error: str | None) -> None:
     payload = {
         "updated_at": datetime.now(timezone.utc).isoformat(),
         "source_url": SOURCE_URL,
@@ -136,7 +183,7 @@ def save_data(items: list[JKItem], source_ok: bool, error: str | None = None) ->
     DATA_FILE.write_text(json.dumps(payload, ensure_ascii=False, indent=2))
 
 
-def page_shell(title: str, description: str, body: str) -> str:
+def shell(title: str, description: str, body: str) -> str:
     return f'''<!doctype html>
 <html lang="ru">
   <head>
@@ -148,119 +195,81 @@ def page_shell(title: str, description: str, body: str) -> str:
   </head>
   <body>
     <div class="poster-grid" aria-hidden="true"></div>
-    <header class="site-header">
-      <div class="container top-nav">
-        <a class="brand" href="/index.html">AUDITNOVOSTROY</a>
-        <nav class="menu">
-          <a href="/index.html">Главная</a>
-          <a href="/experts/index.html">Эксперты</a>
-          <a href="/situations/what-to-sign.html">Ситуации</a>
-          <a href="/pricing/index.html">Тарифы</a>
-          <a href="/cases/index.html">Кейсы</a>
-          <a href="/legal/index.html">Юр. сопровождение</a>
-          <a href="/booking/index.html">Запись</a>
-        </nav>
-      </div>
-    </header>
-    <main class="container page">
-{body}
-    </main>
-    <div class="modal" id="case-modal" aria-hidden="true">
-      <div class="modal__backdrop" data-close-modal></div>
-      <div class="modal__content" role="dialog" aria-modal="true" aria-labelledby="case-title">
-        <button class="modal__close" type="button" data-close-modal aria-label="Закрыть">×</button>
-        <h3 id="case-title">Кейс проверки</h3>
-        <p class="modal__subtitle">Чек-лист проверки:</p>
-        <ul id="case-checklist" class="modal__checklist"></ul>
-        <p id="case-issues"></p>
-        <div id="case-gallery" class="modal__gallery"></div>
-      </div>
-    </div>
-    <footer class="site-footer">
-      <div class="container footer-grid">
-        <div><strong>AUDITNOVOSTROY</strong><p>Передача квартиры под контролем: приёмка, документы, план действий, сопровождение.</p></div>
-        <div><p>Телефон: +7 (495) 000-00-00</p><p>Email: lisica.i.v@gmail.com</p><p>© <span id="year"></span></p></div>
-      </div>
-    </footer>
+    <header class="site-header"><div class="container top-nav"><a class="brand" href="/index.html">AUDITNOVOSTROY</a><nav class="menu"><a href="/index.html">Главная</a><a href="/experts/index.html">Эксперты</a><a href="/situations/what-to-sign.html">Ситуации</a><a href="/pricing/index.html">Тарифы</a><a href="/cases/index.html">Кейсы</a><a href="/legal/index.html">Юр. сопровождение</a><a href="/booking/index.html">Запись</a></nav></div></header>
+    <main class="container page">{body}</main>
+    <div class="modal" id="case-modal" aria-hidden="true"><div class="modal__backdrop" data-close-modal></div><div class="modal__content" role="dialog" aria-modal="true" aria-labelledby="case-title"><button class="modal__close" type="button" data-close-modal aria-label="Закрыть">×</button><h3 id="case-title">Кейс проверки</h3><p class="modal__subtitle">Чек-лист проверки:</p><ul id="case-checklist" class="modal__checklist"></ul><p id="case-issues"></p><div id="case-gallery" class="modal__gallery"></div></div></div>
+    <footer class="site-footer"><div class="container footer-grid"><div><strong>AUDITNOVOSTROY</strong><p>Передача квартиры под контролем: приёмка, документы, план действий, сопровождение.</p></div><div><p>Телефон: +7 (495) 000-00-00</p><p>Email: lisica.i.v@gmail.com</p><p>© <span id="year"></span></p></div></div></footer>
     <script src="/script.js"></script>
   </body>
-</html>
-'''
+</html>'''
 
 
-def render_jk_page(item: JKItem) -> str:
+def render_jk(item: JKItem) -> str:
     body = f'''
-      <section class="panel"><h1><span>{item.title.upper()}</span> актуальные показатели и приёмка</h1><p>Страница сгенерирована автоматически из открытого источника {item.source}. Перед выездом эксперт уточняет показатели по объекту.</p></section>
-      <section class="panel"><h2><span>ПОКАЗАТЕЛИ ЖК</span></h2><div class="grid grid-3"><article class="card"><h3>Локация</h3><p>{item.location}</p></article><article class="card"><h3>Цена</h3><p>{item.price_hint}</p></article><article class="card"><h3>Сроки/статус</h3><p>{item.deadline_hint}</p></article></div></section>
-      <section class="panel"><h2><span>ИСТОЧНИК</span></h2><p><a class="text-link" href="{item.source_url}" target="_blank" rel="noopener">Открыть карточку ЖК на pronovostroy.ru</a></p></section>
-      <section class="panel cta-panel" id="lead"><h2><span>ЗАПИСЬ</span> на приёмку в этом ЖК</h2><p>Оставьте заявку — подберём эксперта с релевантным опытом именно по вашему объекту.</p><form class="lead-form" id="lead-form"><input type="text" name="name" placeholder="Имя" required /><input type="tel" name="phone" placeholder="Телефон" required /><input type="text" name="district" placeholder="{item.title}" /><button class="btn" type="submit">Отправить заявку</button></form><p class="muted" id="lead-status" aria-live="polite"></p></section>
-    '''
-    return page_shell(f"{item.title} — AuditNovostroy", f"Показатели и приёмка в {item.title}", body)
+<section class="panel"><h1><span>{escape(item.title).upper()}</span> сданная новостройка: показатели и приёмка</h1><p>Данные подтягиваются автоматически с pronovostroy.ru/novostroyki-sdannye/ и обновляются ежедневно.</p></section>
+<section class="panel"><div class="image-strip"><figure class="image-card"><img src="{escape(item.image_url)}" alt="{escape(item.title)}" /><figcaption>{escape(item.title)} · {escape(item.developer)}</figcaption></figure><article class="card"><h3>Застройщик</h3><p>{escape(item.developer)}</p><h3>Локация</h3><p>{escape(item.location)}</p><h3>Цена</h3><p>{escape(item.price_hint)}</p><h3>Статус</h3><p>{escape(item.deadline_hint)}</p><p><a class="text-link" href="{escape(item.source_url)}" target="_blank" rel="noopener">Открыть карточку на pronovostroy.ru</a></p></article></div></section>
+<section class="panel cta-panel" id="lead"><h2><span>ЗАПИСЬ</span> на приёмку в {escape(item.title)}</h2><form class="lead-form" id="lead-form"><input type="text" name="name" placeholder="Имя" required /><input type="tel" name="phone" placeholder="Телефон" required /><input type="text" name="district" placeholder="{escape(item.title)}" /><button class="btn" type="submit">Отправить заявку</button></form><p class="muted" id="lead-status" aria-live="polite"></p></section>
+'''
+    return shell(f"{item.title} — AuditNovostroy", f"Сданная новостройка {item.title}", body)
 
 
-def render_jk_index(items: list[JKItem], source_ok: bool, error: str | None) -> str:
+def render_index(items: list[JKItem], source_ok: bool, error: str | None) -> str:
     cards = []
-    for item in items[:90]:
+    for i in items[:120]:
         cards.append(
-            f'<article class="card"><h3>{item.title}</h3><p>Локация: {item.location}</p><p>Цена: {item.price_hint}</p><p>Статус: {item.deadline_hint}</p><a class="text-link" href="/jk/auto-{item.slug}.html">Открыть страницу ЖК</a></article>'
+            f'<article class="card"><h3>{escape(i.title)}</h3><p>Застройщик: {escape(i.developer)}</p><p>Локация: {escape(i.location)}</p><p>Цена: {escape(i.price_hint)}</p><a class="text-link" href="/jk/auto-{i.slug}.html">Открыть страницу ЖК</a></article>'
         )
 
-    status_text = "данные обновлены автоматически" if source_ok else f"источник временно недоступен ({escape(error or 'без деталей')}), показан кэш"
-
+    status = "данные обновлены" if source_ok else f"источник временно недоступен ({escape(error or 'без деталей')}) — показан кэш"
     body = f'''
-      <section class="panel"><h1><span>КАТАЛОГ ЖК</span> автоматическое обновление</h1><p>Список формируется парсером с pronovostroy.ru и обновляется раз в сутки.</p><p class="muted">Статус: {status_text}</p></section>
-      <section class="panel"><h2><span>ЖК В КАТАЛОГЕ</span></h2><div class="grid grid-3">{"".join(cards) if cards else '<p>Данные пока не загружены.</p>'}</div></section>
-      <section class="panel cta-panel" id="lead"><h2><span>НЕ НАШЛИ СВОЙ ЖК?</span></h2><p>Оставьте заявку — добавим объект вручную и подберём эксперта.</p><form class="lead-form" id="lead-form"><input type="text" name="name" placeholder="Имя" required /><input type="tel" name="phone" placeholder="Телефон" required /><input type="text" name="district" placeholder="Название ЖК" /><button class="btn" type="submit">Отправить заявку</button></form><p class="muted" id="lead-status" aria-live="polite"></p></section>
-    '''
-    return page_shell("Каталог ЖК — AuditNovostroy", "Автоматически обновляемый список жилых комплексов", body)
+<section class="panel"><h1><span>СДАННЫЕ НОВОСТРОЙКИ</span> Москва и Московская область</h1><p>Каталог обновляется автоматически раз в день с источника pronovostroy.ru/novostroyki-sdannye/.</p><p class="muted">Статус: {status}</p></section>
+<section class="panel"><h2><span>КАТАЛОГ ЖК</span></h2><div class="grid grid-3">{"".join(cards)}</div></section>
+<section class="panel cta-panel" id="lead"><h2><span>НЕ НАШЛИ СВОЙ ЖК?</span></h2><form class="lead-form" id="lead-form"><input type="text" name="name" placeholder="Имя" required /><input type="tel" name="phone" placeholder="Телефон" required /><input type="text" name="district" placeholder="Название ЖК" /><button class="btn" type="submit">Отправить заявку</button></form><p class="muted" id="lead-status" aria-live="polite"></p></section>
+'''
+    return shell("Каталог сданных ЖК — AuditNovostroy", "Сданные новостройки Москвы и МО", body)
 
 
 def write_pages(items: list[JKItem], source_ok: bool, error: str | None) -> None:
     JK_DIR.mkdir(exist_ok=True)
 
-    # Удаляем старые auto-страницы, которые больше не актуальны
     keep = {f"auto-{i.slug}.html" for i in items}
     for p in JK_DIR.glob("auto-*.html"):
         if p.name not in keep:
             p.unlink(missing_ok=True)
 
-    # Пишем страницы ЖК
-    for item in items:
-        (JK_DIR / f"auto-{item.slug}.html").write_text(render_jk_page(item))
+    for i in items:
+        (JK_DIR / f"auto-{i.slug}.html").write_text(render_jk(i))
 
-    # Индекс каталога
-    (JK_DIR / "index.html").write_text(render_jk_index(items, source_ok, error))
+    (JK_DIR / "index.html").write_text(render_index(items, source_ok, error))
 
 
 def main() -> int:
     source_ok = True
     error = None
-    items: list[JKItem]
 
     try:
         html = fetch(SOURCE_URL)
-        parsed = extract_candidates(html, SOURCE_URL)
-        items = parsed if parsed else load_previous_items()
-        if not parsed:
+        items = parse_cards(html)
+        if not items:
             source_ok = False
-            error = "на источнике не найдены карточки ЖК"
+            error = "на странице не найдены карточки ЖК"
+            items = load_prev()
     except Exception as exc:  # noqa: BLE001
         source_ok = False
         error = str(exc)
-        items = load_previous_items()
+        items = load_prev()
 
-    # Минимальный фолбек, чтобы каталог не был пустым
     if not items:
         items = [
-            JKItem(title="ЖК Прокшино", source_url="https://pronovostroy.ru/", price_hint="уточняется", deadline_hint="уточняется"),
-            JKItem(title="ЖК Скандинавия", source_url="https://pronovostroy.ru/", price_hint="уточняется", deadline_hint="уточняется"),
-            JKItem(title="ЖК Саларьево Парк", source_url="https://pronovostroy.ru/", price_hint="уточняется", deadline_hint="уточняется"),
+            JKItem(title="ЖК Прокшино", source_url=SOURCE_URL, developer="А101", location="Москва"),
+            JKItem(title="ЖК Скандинавия", source_url=SOURCE_URL, developer="А101", location="Москва"),
+            JKItem(title="ЖК Саларьево Парк", source_url=SOURCE_URL, developer="ПИК", location="Москва"),
         ]
 
     save_data(items, source_ok, error)
     write_pages(items, source_ok, error)
 
-    print(f"Updated JK catalog: {len(items)} items; source_ok={source_ok}")
+    print(f"Updated sold JK catalog: {len(items)} items; source_ok={source_ok}")
     if error:
         print(f"Warning: {error}")
     return 0

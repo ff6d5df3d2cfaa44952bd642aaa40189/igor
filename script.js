@@ -3,8 +3,6 @@ if (yearElement) yearElement.textContent = new Date().getFullYear();
 
 const form = document.getElementById('lead-form');
 const leadStatus = document.getElementById('lead-status');
-
-// Используем ID endpoint FormSubmit (без явного email в URL)
 const FORMSUBMIT_ENDPOINT = 'https://formsubmit.co/ajax/d10ef71fed428e18c698b79eb2ca5a69';
 
 const sendLeadToEmail = async (payload) => {
@@ -17,9 +15,7 @@ const sendLeadToEmail = async (payload) => {
     body: JSON.stringify(payload),
   });
 
-  if (!response.ok) {
-    throw new Error('Ошибка отправки');
-  }
+  if (!response.ok) throw new Error('Ошибка отправки');
 
   const result = await response.json();
   if (result.success !== 'true' && result.success !== true) {
@@ -46,9 +42,7 @@ if (form) {
     const phone = String(formData.get('phone') || '').trim();
     const district = String(formData.get('district') || '').trim();
 
-    if (leadStatus) {
-      leadStatus.textContent = 'Отправляем заявку...';
-    }
+    if (leadStatus) leadStatus.textContent = 'Отправляем заявку...';
     if (submitButton) submitButton.disabled = true;
 
     try {
@@ -58,12 +52,11 @@ if (form) {
         district,
         _subject: 'Новая заявка с лендинга',
       });
-
       if (leadStatus) {
         leadStatus.textContent = 'Заявка отправлена. Мы свяжемся с вами в ближайшее время.';
       }
       form.reset();
-    } catch (error) {
+    } catch {
       if (leadStatus) {
         leadStatus.textContent =
           'Авто-отправка недоступна. Откроем письмо в вашей почтовой программе.';
@@ -75,13 +68,13 @@ if (form) {
   });
 }
 
-const modal = document.getElementById('case-modal');
+const caseModal = document.getElementById('case-modal');
 const titleElement = document.getElementById('case-title');
 const checklistElement = document.getElementById('case-checklist');
 const issuesElement = document.getElementById('case-issues');
 const galleryElement = document.getElementById('case-gallery');
-const closeButtons = document.querySelectorAll('[data-close-modal]');
-const triggers = document.querySelectorAll('.case-trigger');
+const closeCaseButtons = document.querySelectorAll('[data-close-modal]');
+const caseTriggers = document.querySelectorAll('.case-trigger');
 
 const fillChecklist = (items) => {
   if (!checklistElement) return;
@@ -104,8 +97,8 @@ const fillGallery = (images, title) => {
   });
 };
 
-const openModal = (trigger) => {
-  if (!modal || !titleElement || !issuesElement) return;
+const openCaseModal = (trigger) => {
+  if (!caseModal || !titleElement || !issuesElement) return;
 
   const title = trigger.dataset.caseTitle || 'Кейс проверки';
   const checklist = (trigger.dataset.caseChecklist || '').split('|').filter(Boolean);
@@ -116,26 +109,112 @@ const openModal = (trigger) => {
   fillGallery(images, title);
   issuesElement.textContent = trigger.dataset.caseIssues || '';
 
-  modal.classList.add('is-open');
-  modal.setAttribute('aria-hidden', 'false');
+  caseModal.classList.add('is-open');
+  caseModal.setAttribute('aria-hidden', 'false');
   document.body.style.overflow = 'hidden';
 };
 
-const closeModal = () => {
-  if (!modal) return;
-  modal.classList.remove('is-open');
-  modal.setAttribute('aria-hidden', 'true');
+const closeCaseModal = () => {
+  if (!caseModal) return;
+  caseModal.classList.remove('is-open');
+  caseModal.setAttribute('aria-hidden', 'true');
   document.body.style.overflow = '';
 };
 
-triggers.forEach((trigger) => {
-  trigger.addEventListener('click', () => openModal(trigger));
+caseTriggers.forEach((trigger) => {
+  trigger.addEventListener('click', () => openCaseModal(trigger));
 });
 
-closeButtons.forEach((button) => {
-  button.addEventListener('click', closeModal);
+closeCaseButtons.forEach((button) => {
+  button.addEventListener('click', closeCaseModal);
 });
+
+// Каталог сданных ЖК на главной
+const jkCatalogList = document.getElementById('jk-catalog-home-list');
+const jkCatalogStatus = document.getElementById('jk-catalog-home-status');
+
+const jkModal = document.getElementById('jk-modal');
+const jkModalTitle = document.getElementById('jk-modal-title');
+const jkModalImage = document.getElementById('jk-modal-image');
+const jkModalDeveloper = document.getElementById('jk-modal-developer');
+const jkModalLocation = document.getElementById('jk-modal-location');
+const jkModalLink = document.getElementById('jk-modal-link');
+const closeJkButtons = document.querySelectorAll('[data-close-jk-modal]');
+
+const closeJkModal = () => {
+  if (!jkModal) return;
+  jkModal.classList.remove('is-open');
+  jkModal.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+};
+
+const openJkModal = (item) => {
+  if (!jkModal || !jkModalTitle || !jkModalImage || !jkModalDeveloper || !jkModalLocation || !jkModalLink) {
+    return;
+  }
+
+  jkModalTitle.textContent = item.title || 'Жилой комплекс';
+  jkModalImage.src = item.image_url || '';
+  jkModalImage.alt = item.title || 'ЖК';
+  jkModalDeveloper.textContent = item.developer || 'Застройщик уточняется';
+  jkModalLocation.textContent = item.location || 'Москва / МО';
+  jkModalLink.href = item.source_url || '#';
+
+  jkModal.classList.add('is-open');
+  jkModal.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+};
+
+closeJkButtons.forEach((btn) => btn.addEventListener('click', closeJkModal));
+
+const renderJkCatalog = (items) => {
+  if (!jkCatalogList) return;
+  jkCatalogList.innerHTML = '';
+
+  items.slice(0, 9).forEach((item) => {
+    const card = document.createElement('article');
+    card.className = 'card';
+    card.innerHTML = `
+      <img class="jk-thumb" src="${item.image_url || ''}" alt="${item.title || 'ЖК'}" />
+      <h3>${item.title || 'ЖК'}</h3>
+      <p>Застройщик: ${item.developer || 'уточняется'}</p>
+      <p>Локация: ${item.location || 'Москва / МО'}</p>
+      <button type="button" class="btn btn--ghost">Открыть карточку</button>
+    `;
+
+    const button = card.querySelector('button');
+    if (button) {
+      button.addEventListener('click', () => openJkModal(item));
+    }
+
+    jkCatalogList.appendChild(card);
+  });
+};
+
+const loadJkCatalog = async () => {
+  if (!jkCatalogList) return;
+  try {
+    const response = await fetch('/data/jk_catalog.json', { cache: 'no-store' });
+    if (!response.ok) throw new Error('Не удалось загрузить каталог');
+
+    const data = await response.json();
+    renderJkCatalog(Array.isArray(data.items) ? data.items : []);
+
+    if (jkCatalogStatus) {
+      const status = data.source_ok ? 'данные обновлены автоматически' : 'показаны кэш-данные';
+      jkCatalogStatus.textContent = `Каталог: ${status}. Обновлено: ${data.updated_at || 'н/д'}`;
+    }
+  } catch {
+    if (jkCatalogStatus) {
+      jkCatalogStatus.textContent = 'Каталог временно недоступен. Попробуйте позже.';
+    }
+  }
+};
+
+loadJkCatalog();
 
 window.addEventListener('keydown', (event) => {
-  if (event.key === 'Escape') closeModal();
+  if (event.key !== 'Escape') return;
+  closeCaseModal();
+  closeJkModal();
 });

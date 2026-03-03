@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-03-03T21:55:51.799823+00:00",
-  "source_url": "https://pronovostroy.ru/",
+  "updated_at": "2026-03-03T22:06:56.955361+00:00",
+  "source_url": "https://pronovostroy.ru/novostroyki-sdannye/",
   "source_ok": false,
   "error": "<urlopen error Tunnel connection failed: 403 Forbidden>",
   "count": 3,
@@ -8,7 +8,9 @@
     {
       "title": "ЖК Прокшино",
       "source_url": "https://pronovostroy.ru/",
+      "developer": "Застройщик уточняется",
       "location": "Москва / МО",
+      "image_url": "https://images.unsplash.com/photo-1460317442991-0ec209397118?auto=format&fit=crop&w=1200&q=60",
       "price_hint": "уточняется",
       "deadline_hint": "уточняется",
       "source": "pronovostroy.ru",
@@ -17,7 +19,9 @@
     {
       "title": "ЖК Скандинавия",
       "source_url": "https://pronovostroy.ru/",
+      "developer": "Застройщик уточняется",
       "location": "Москва / МО",
+      "image_url": "https://images.unsplash.com/photo-1460317442991-0ec209397118?auto=format&fit=crop&w=1200&q=60",
       "price_hint": "уточняется",
       "deadline_hint": "уточняется",
       "source": "pronovostroy.ru",
@@ -26,7 +30,9 @@
     {
       "title": "ЖК Саларьево Парк",
       "source_url": "https://pronovostroy.ru/",
+      "developer": "Застройщик уточняется",
       "location": "Москва / МО",
+      "image_url": "https://images.unsplash.com/photo-1460317442991-0ec209397118?auto=format&fit=crop&w=1200&q=60",
       "price_hint": "уточняется",
       "deadline_hint": "уточняется",
       "source": "pronovostroy.ru",
