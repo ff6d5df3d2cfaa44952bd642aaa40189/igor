@@ -5,7 +5,7 @@ const form = document.querySelector('.lead-form');
 if (form) {
   form.addEventListener('submit', (event) => {
     event.preventDefault();
-    alert('Спасибо! Специалист свяжется с вами в ближайшее время.');
+    alert('Заявка принята. Подготовим план проверки и свяжемся с вами.');
     form.reset();
   });
 }
