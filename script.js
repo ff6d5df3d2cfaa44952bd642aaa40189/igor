@@ -12,16 +12,43 @@ if (form) {
 
 const modal = document.getElementById('case-modal');
 const titleElement = document.getElementById('case-title');
-const checksElement = document.getElementById('case-checks');
+const checklistElement = document.getElementById('case-checklist');
 const issuesElement = document.getElementById('case-issues');
+const galleryElement = document.getElementById('case-gallery');
 const closeButtons = document.querySelectorAll('[data-close-modal]');
 const triggers = document.querySelectorAll('.case-trigger');
 
-const openModal = (trigger) => {
-  if (!modal || !titleElement || !checksElement || !issuesElement) return;
+const fillChecklist = (items) => {
+  if (!checklistElement) return;
+  checklistElement.innerHTML = '';
+  items.forEach((item) => {
+    const li = document.createElement('li');
+    li.textContent = item;
+    checklistElement.appendChild(li);
+  });
+};
 
-  titleElement.textContent = trigger.dataset.caseTitle || 'Кейс проверки';
-  checksElement.textContent = trigger.dataset.caseChecks || '';
+const fillGallery = (images, title) => {
+  if (!galleryElement) return;
+  galleryElement.innerHTML = '';
+  images.forEach((src, index) => {
+    const img = document.createElement('img');
+    img.src = src;
+    img.alt = `${title}: фото нарушения ${index + 1}`;
+    galleryElement.appendChild(img);
+  });
+};
+
+const openModal = (trigger) => {
+  if (!modal || !titleElement || !issuesElement) return;
+
+  const title = trigger.dataset.caseTitle || 'Кейс проверки';
+  const checklist = (trigger.dataset.caseChecklist || '').split('|').filter(Boolean);
+  const images = (trigger.dataset.caseImages || '').split('|').filter(Boolean);
+
+  titleElement.textContent = title;
+  fillChecklist(checklist);
+  fillGallery(images, title);
   issuesElement.textContent = trigger.dataset.caseIssues || '';
 
   modal.classList.add('is-open');

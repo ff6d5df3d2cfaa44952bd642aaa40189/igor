@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1200" viewBox="0 0 900 1200">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1">
+      <stop offset="0" stop-color="#d7f0ec"/>
+      <stop offset="0.5" stop-color="#f8dfe2"/>
+      <stop offset="1" stop-color="#d7f0ec"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="1200" fill="url(#g)"/>
+  <rect x="30" y="30" width="840" height="1140" fill="none" stroke="#7aa19b" stroke-width="2"/>
+  <text x="450" y="185" text-anchor="middle" font-size="58" font-family="Times New Roman" fill="#24363b">ИСПОЛНИТЕЛЬНЫЙ ЛИСТ</text>
+  <text x="110" y="250" font-size="28" font-family="Times New Roman" fill="#24363b">Дело № А40-115191/2024</text>
+  <line x1="100" y1="275" x2="800" y2="275" stroke="#5c7773"/>
+  <text x="100" y="340" font-size="25" font-family="Times New Roman" fill="#24363b">Суд: Арбитражный суд г. Москвы</text>
+  <line x1="100" y1="365" x2="800" y2="365" stroke="#5c7773"/>
+  <text x="100" y="430" font-size="24" font-family="Times New Roman" fill="#24363b">Решение: взыскать стоимость устранения дефектов</text>
+  <text x="100" y="470" font-size="24" font-family="Times New Roman" fill="#24363b">по акту строительной экспертизы.</text>
+  <rect x="100" y="820" width="700" height="220" fill="#fff" fill-opacity="0.6" stroke="#5c7773"/>
+  <text x="125" y="875" font-size="24" font-family="Times New Roman" fill="#24363b">Сумма: 486 000 ₽ + судебные расходы.</text>
+  <text x="125" y="915" font-size="24" font-family="Times New Roman" fill="#24363b">Серия: ВС № 039616251</text>
+</svg>

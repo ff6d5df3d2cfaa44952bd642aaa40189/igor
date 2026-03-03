@@ -224,6 +224,31 @@ input {
   font-size: 0.85rem;
 }
 
+.writs-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.writ-card {
+  margin: 0;
+  border: 1px solid #000;
+  background: #fff;
+  padding: 0.6rem;
+}
+
+.writ-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid #000;
+}
+
+.writ-card figcaption {
+  margin-top: 0.45rem;
+  font-size: 0.72rem;
+}
+
 .modal {
   position: fixed;
   inset: 0;
@@ -270,6 +295,30 @@ input {
   line-height: 1.45;
 }
 
+.modal__subtitle {
+  font-weight: 700;
+  margin-top: 0.3rem;
+}
+
+.modal__checklist {
+  margin: 0.4rem 0 0.8rem;
+  padding-left: 1.1rem;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+.modal__gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem;
+}
+
+.modal__gallery img {
+  width: 100%;
+  border: 1px solid #000;
+  display: block;
+}
+
 /* animations */
 @keyframes floatCut {
   0%, 100% { transform: translateY(0) rotate(-0.3deg); }
@@ -309,7 +358,9 @@ input {
 @media (max-width: 640px) {
   .service-grid,
   .panel--collage,
-  .lead-form {
+  .lead-form,
+  .writs-grid,
+  .modal__gallery {
     grid-template-columns: 1fr;
     grid-template-areas: unset;
   }

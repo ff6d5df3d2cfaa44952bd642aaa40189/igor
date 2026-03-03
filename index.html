@@ -54,16 +54,18 @@
           type="button"
           class="news photo-a case-trigger"
           data-case-title="Кейс: Приёмка квартиры с отделкой (ЖК Северный)"
-          data-case-checks="Что проверяли: геометрию стен и пола, оконные блоки, вентиляцию, электрику, примыкания плитки в санузле."
-          data-case-issues="Что нашли: отклонение стены до 14 мм, 2 продувания по оконным створкам, нерабочую вытяжку на кухне, скол плитки и отсутствие заземления в 1 розетке."
+          data-case-checklist="Геометрия стен и пола|Оконные блоки и примыкания|Вентиляция кухни и санузла|Электроточки и заземление|Качество плитки в мокрых зонах"
+          data-case-images="assets/violation-finish-window.svg|assets/violation-finish-tile.svg"
+          data-case-issues="Обнаружены: отклонение стены до 14 мм, 2 продувания по створкам, нерабочая вытяжка, скол плитки и отсутствие заземления в 1 розетке."
           aria-label="Открыть кейс проверки жилого дома"
         ></button>
         <button
           type="button"
           class="news photo-b case-trigger"
           data-case-title="Кейс: Приёмка квартиры без отделки (ЖК Центральный)"
-          data-case-checks="Что проверяли: вертикальность несущих стен, качество стяжки, вводы инженерных сетей, остекление и радиаторы."
-          data-case-issues="Что нашли: перепад стяжки до 18 мм, повреждение уплотнителя стеклопакета, запотевание в углу лоджии, неполный комплект запорной арматуры на отоплении."
+          data-case-checklist="Вертикальность несущих стен|Перепады стяжки по маякам|Вводы инженерных сетей|Остекление лоджии|Запорная арматура отопления"
+          data-case-images="assets/violation-raw-wall.svg|assets/violation-raw-screed.svg"
+          data-case-issues="Обнаружены: отклонение несущей стены до 15 мм, перепад стяжки до 18 мм, дефект уплотнителя стеклопакета, запотевание лоджии и некомплект арматуры."
           aria-label="Открыть кейс проверки высотного ЖК"
         ></button>
         <article class="fact black reveal">
@@ -90,6 +92,22 @@
         </ol>
       </section>
 
+
+      <section class="panel" id="writs">
+        <h2><span>ИСПОЛНИТЕЛЬНЫЕ ЛИСТЫ</span> по спорам с застройщиками</h2>
+        <p class="muted">Примеры документов по делам о взыскании стоимости устранения строительных недостатков.</p>
+        <div class="writs-grid">
+          <figure class="writ-card">
+            <img src="assets/executive-sheet-1.svg" alt="Исполнительный лист по арбитражному делу о дефектах отделки" />
+            <figcaption>Арбитражный спор: взыскание стоимости устранения дефектов отделки.</figcaption>
+          </figure>
+          <figure class="writ-card">
+            <img src="assets/executive-sheet-2.svg" alt="Исполнительный лист по гражданскому делу о дефектах квартиры" />
+            <figcaption>Гражданский спор: компенсация за дефекты и просрочку исправлений.</figcaption>
+          </figure>
+        </div>
+      </section>
+
       <section class="panel" id="lead">
         <h2><span>ОСТАВИТЬ ЗАЯВКУ</span> на экспресс-аудит</h2>
         <form class="lead-form reveal">
@@ -107,8 +125,10 @@
       <div class="modal__content" role="dialog" aria-modal="true" aria-labelledby="case-title">
         <button class="modal__close" type="button" data-close-modal aria-label="Закрыть">×</button>
         <h3 id="case-title">Кейс проверки</h3>
-        <p id="case-checks"></p>
+        <p class="modal__subtitle">Чек-лист проверки:</p>
+        <ul id="case-checklist" class="modal__checklist"></ul>
         <p id="case-issues"></p>
+        <div id="case-gallery" class="modal__gallery"></div>
       </div>
     </div>
 

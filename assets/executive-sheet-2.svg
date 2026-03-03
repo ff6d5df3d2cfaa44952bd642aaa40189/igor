@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1200" viewBox="0 0 900 1200">
+  <defs>
+    <linearGradient id="g2" x1="0" x2="1">
+      <stop offset="0" stop-color="#d9efea"/>
+      <stop offset="0.5" stop-color="#f4dde2"/>
+      <stop offset="1" stop-color="#d9efea"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="1200" fill="url(#g2)"/>
+  <rect x="28" y="28" width="844" height="1144" fill="none" stroke="#6e9a92" stroke-width="2"/>
+  <text x="450" y="190" text-anchor="middle" font-size="58" font-family="Times New Roman" fill="#223439">ИСПОЛНИТЕЛЬНЫЙ ЛИСТ</text>
+  <text x="110" y="255" font-size="28" font-family="Times New Roman" fill="#223439">Дело № 2-8889/24</text>
+  <line x1="100" y1="280" x2="800" y2="280" stroke="#5f817c"/>
+  <text x="100" y="345" font-size="25" font-family="Times New Roman" fill="#223439">Суд: Вахитовский районный суд г. Казани</text>
+  <line x1="100" y1="370" x2="800" y2="370" stroke="#5f817c"/>
+  <text x="100" y="435" font-size="24" font-family="Times New Roman" fill="#223439">Решение: взыскать компенсацию за строительные</text>
+  <text x="100" y="475" font-size="24" font-family="Times New Roman" fill="#223439">дефекты и нарушение срока устранения.</text>
+  <rect x="100" y="815" width="700" height="235" fill="#fff" fill-opacity="0.62" stroke="#5f817c"/>
+  <text x="125" y="875" font-size="24" font-family="Times New Roman" fill="#223439">Сумма: 312 400 ₽ + моральный вред.</text>
+  <text x="125" y="915" font-size="24" font-family="Times New Roman" fill="#223439">Серия: ВС № 221740011</text>
+</svg>

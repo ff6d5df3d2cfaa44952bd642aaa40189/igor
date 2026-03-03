@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <rect width="1200" height="800" fill="#d7d7d7"/>
+  <rect x="120" y="110" width="960" height="580" fill="#bdbdbd" stroke="#222" stroke-width="8"/>
+  <line x1="140" y1="560" x2="1060" y2="410" stroke="#101010" stroke-width="12"/>
+  <rect x="220" y="210" width="650" height="18" fill="#1b1b1b"/>
+  <polygon points="880,200 1010,220 880,240" fill="#1b1b1b"/>
+  <rect x="160" y="610" width="880" height="80" fill="#111"/>
+  <text x="190" y="665" font-size="45" fill="#fff" font-family="Arial">ПЕРЕПАД СТЯЖКИ: 18 мм</text>
+</svg>

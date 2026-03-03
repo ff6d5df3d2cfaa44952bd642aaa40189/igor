@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <rect width="1200" height="800" fill="#d8d8d8"/>
+  <rect x="140" y="100" width="920" height="600" fill="#eeeeee" stroke="#222" stroke-width="8"/>
+  <line x1="360" y1="100" x2="300" y2="700" stroke="#0f0f0f" stroke-width="10"/>
+  <line x1="520" y1="100" x2="520" y2="700" stroke="#0f0f0f" stroke-width="5" stroke-dasharray="14 10"/>
+  <path d="M520 160 L600 160" stroke="#d30000" stroke-width="9"/>
+  <text x="620" y="175" font-size="42" fill="#111" font-family="Arial">ОТКЛОНЕНИЕ 15 мм</text>
+  <rect x="180" y="610" width="700" height="70" fill="#111"/>
+  <text x="205" y="658" font-size="42" fill="#fff" font-family="Arial">НЕСУЩАЯ СТЕНА НЕ ПО ВЕРТИКАЛИ</text>
+</svg>
