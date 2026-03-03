@@ -154,7 +154,8 @@ const openJkModal = (item) => {
   }
 
   jkModalTitle.textContent = item.title || 'Жилой комплекс';
-  jkModalImage.src = item.image_url || '';
+  const image = item.local_image || item.image_url;
+  jkModalImage.src = image || '/assets/violation-finish-window.svg';
   jkModalImage.alt = item.title || 'ЖК';
   jkModalDeveloper.textContent = item.developer || 'Застройщик уточняется';
   jkModalLocation.textContent = item.location || 'Москва / МО';
@@ -174,8 +175,9 @@ const renderJkCatalog = (items) => {
   items.slice(0, 9).forEach((item) => {
     const card = document.createElement('article');
     card.className = 'card';
+    const previewImage = item.local_image || item.image_url;
     card.innerHTML = `
-      <img class="jk-thumb" src="${item.image_url || ''}" alt="${item.title || 'ЖК'}" />
+      ${previewImage ? `<img class="jk-thumb" src="${previewImage}" alt="${item.title || 'ЖК'}" />` : '<div class="tag">Фото временно недоступно</div>'}
       <h3>${item.title || 'ЖК'}</h3>
       <p>Застройщик: ${item.developer || 'уточняется'}</p>
       <p>Локация: ${item.location || 'Москва / МО'}</p>
