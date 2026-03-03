@@ -148,6 +148,18 @@ h1 { margin: 0.8rem 0; line-height: 0.98; font-size: clamp(2.2rem, 8.5vw, 6rem);
   position: relative;
 }
 
+.case-trigger {
+  display: block;
+  width: 100%;
+  cursor: pointer;
+  padding: 0;
+}
+
+.case-trigger:focus-visible {
+  outline: 3px solid #000;
+  outline-offset: 2px;
+}
+
 .news::before {
   content: "архив";
   position: absolute;
@@ -212,17 +224,56 @@ input {
   font-size: 0.85rem;
 }
 
+.modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  z-index: 100;
+}
+
+.modal.is-open {
+  display: block;
+}
+
+.modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+}
+
+.modal__content {
+  position: relative;
+  max-width: 680px;
+  margin: 10vh auto 0;
+  background: #fff;
+  border: 2px solid #000;
+  padding: 1.1rem;
+  z-index: 1;
+}
+
+.modal__close {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.5rem;
+  border: 1px solid #000;
+  background: #fff;
+  font-size: 1.2rem;
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+}
+
+.modal__content p {
+  margin: 0.75rem 0;
+  text-transform: none;
+  letter-spacing: normal;
+  line-height: 1.45;
+}
+
 /* animations */
 @keyframes floatCut {
   0%, 100% { transform: translateY(0) rotate(-0.3deg); }
   50% { transform: translateY(-6px) rotate(0.35deg); }
-}
-
-@keyframes jitter {
-  0%, 100% { transform: translate(0, 0); }
-  25% { transform: translate(1px, -1px); }
-  50% { transform: translate(-1px, 1px); }
-  75% { transform: translate(1px, 1px); }
 }
 
 @keyframes revealUp {
@@ -231,7 +282,6 @@ input {
 }
 
 .floaty { animation: floatCut 4.6s ease-in-out infinite; }
-.jitter { animation: jitter 0.45s steps(2) infinite; }
 .swing { animation: floatCut 3.2s ease-in-out infinite; }
 
 .reveal { opacity: 0; animation: revealUp 0.8s ease forwards; }
@@ -266,4 +316,5 @@ input {
   .news,
   .tile { min-height: 220px; }
   .footer { flex-direction: column; }
+  .modal__content { margin: 6vh 1rem 0; }
 }

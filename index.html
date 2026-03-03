@@ -50,8 +50,22 @@
       </section>
 
       <section class="panel panel--collage" id="benefits">
-        <figure class="news photo-a jitter" role="img" aria-label="Архивная фотография жилых домов"></figure>
-        <figure class="news photo-b jitter delay-1" role="img" aria-label="Архивная застройка"></figure>
+        <button
+          type="button"
+          class="news photo-a case-trigger"
+          data-case-title="Кейс: Приёмка квартиры с отделкой (ЖК Северный)"
+          data-case-checks="Что проверяли: геометрию стен и пола, оконные блоки, вентиляцию, электрику, примыкания плитки в санузле."
+          data-case-issues="Что нашли: отклонение стены до 14 мм, 2 продувания по оконным створкам, нерабочую вытяжку на кухне, скол плитки и отсутствие заземления в 1 розетке."
+          aria-label="Открыть кейс проверки жилого дома"
+        ></button>
+        <button
+          type="button"
+          class="news photo-b case-trigger"
+          data-case-title="Кейс: Приёмка квартиры без отделки (ЖК Центральный)"
+          data-case-checks="Что проверяли: вертикальность несущих стен, качество стяжки, вводы инженерных сетей, остекление и радиаторы."
+          data-case-issues="Что нашли: перепад стяжки до 18 мм, повреждение уплотнителя стеклопакета, запотевание в углу лоджии, неполный комплект запорной арматуры на отоплении."
+          aria-label="Открыть кейс проверки высотного ЖК"
+        ></button>
         <article class="fact black reveal">
           <span class="big">3500+</span>
           <p>квартир проверено экспертами</p>
@@ -87,6 +101,16 @@
         <p class="muted">Нажимая кнопку, вы соглашаетесь на обработку персональных данных.</p>
       </section>
     </main>
+
+    <div class="modal" id="case-modal" aria-hidden="true">
+      <div class="modal__backdrop" data-close-modal></div>
+      <div class="modal__content" role="dialog" aria-modal="true" aria-labelledby="case-title">
+        <button class="modal__close" type="button" data-close-modal aria-label="Закрыть">×</button>
+        <h3 id="case-title">Кейс проверки</h3>
+        <p id="case-checks"></p>
+        <p id="case-issues"></p>
+      </div>
+    </div>
 
     <footer class="container footer" id="contacts">
       <div>
