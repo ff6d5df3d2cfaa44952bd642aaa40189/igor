@@ -3,43 +3,131 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Мой сайт</title>
+    <title>Проверка новостройки перед покупкой</title>
+    <meta
+      name="description"
+      content="Профессиональный аудит квартиры в новостройке: техническая экспертиза, отчёт с фото и сопровождение до устранения дефектов."
+    />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <header class="hero">
-      <h1>Привет! Это новый сайт</h1>
-      <p>Лёгкий адаптивный лендинг, созданный с нуля.</p>
-      <a class="btn" href="#about">Узнать больше</a>
+    <header class="topbar">
+      <div class="container topbar__inner">
+        <a class="logo" href="#">Аудит Новостройки</a>
+        <nav class="nav">
+          <a href="#services">Услуги</a>
+          <a href="#steps">Как работаем</a>
+          <a href="#reviews">Отзывы</a>
+          <a href="#contact">Контакты</a>
+        </nav>
+        <a class="btn btn--small" href="#contact">Оставить заявку</a>
+      </div>
     </header>
 
+    <section class="hero">
+      <div class="container hero__grid">
+        <div>
+          <p class="badge">Экспертиза квартир и приёмка от 1 дня</p>
+          <h1>Найдём скрытые дефекты в вашей новостройке до подписания акта</h1>
+          <p class="hero__text">
+            Проверяем отделку, инженерные системы, геометрию стен и окон. Готовим
+            официальный отчёт с фотофиксацией и помогаем добиться устранения замечаний у
+            застройщика.
+          </p>
+          <div class="hero__actions">
+            <a class="btn" href="#contact">Получить консультацию</a>
+            <a class="btn btn--ghost" href="#services">Смотреть услуги</a>
+          </div>
+          <ul class="hero__facts">
+            <li>✔ Более 3 000 проверенных квартир</li>
+            <li>✔ Отчёт в день осмотра</li>
+            <li>✔ Работаем по Москве и области</li>
+          </ul>
+        </div>
+        <div class="hero-card">
+          <h2>Бесплатный экспресс-разбор</h2>
+          <p>
+            Оставьте контакты — перезвоним за 15 минут, расскажем, что важно проверить именно
+            в вашем ЖК.
+          </p>
+          <form class="lead-form" id="contact">
+            <input type="text" placeholder="Ваше имя" required />
+            <input type="tel" placeholder="Телефон" required />
+            <button type="submit" class="btn">Отправить заявку</button>
+          </form>
+          <small>Нажимая кнопку, вы соглашаетесь с обработкой персональных данных.</small>
+        </div>
+      </div>
+    </section>
+
     <main>
-      <section id="about" class="card">
-        <h2>О сайте</h2>
-        <p>
-          Этот сайт демонстрирует базовую структуру: шапка, информационный блок и
-          подвал. Его можно расширить под личный блог, портфолио или бизнес-страницу.
-        </p>
+      <section class="section" id="services">
+        <div class="container">
+          <h2>Услуги</h2>
+          <p class="section__lead">Подберём формат проверки под ваш этап сделки.</p>
+          <div class="cards">
+            <article class="card">
+              <h3>Приёмка квартиры с отделкой</h3>
+              <p>Проверка более 120 параметров: стены, пол, окна, двери, вентиляция, электрика.</p>
+              <strong>от 7 500 ₽</strong>
+            </article>
+            <article class="card">
+              <h3>Приёмка без отделки</h3>
+              <p>Контроль геометрии, инженерных вводов, оконных блоков, качества остекления.</p>
+              <strong>от 6 000 ₽</strong>
+            </article>
+            <article class="card">
+              <h3>Технический аудит перед ремонтом</h3>
+              <p>Выявление рисков, рекомендации для бригады, проверка смежных зон и узлов.</p>
+              <strong>от 9 500 ₽</strong>
+            </article>
+          </div>
+        </div>
       </section>
 
-      <section class="features">
-        <article class="feature">
-          <h3>⚡ Быстро</h3>
-          <p>Чистый HTML/CSS без лишних зависимостей.</p>
-        </article>
-        <article class="feature">
-          <h3>📱 Адаптивно</h3>
-          <p>Сайт корректно отображается на телефоне и ноутбуке.</p>
-        </article>
-        <article class="feature">
-          <h3>🎨 Современно</h3>
-          <p>Минималистичный интерфейс и аккуратная типографика.</p>
-        </article>
+      <section class="section section--alt" id="steps">
+        <div class="container">
+          <h2>Как проходит проверка</h2>
+          <div class="steps">
+            <div class="step"><span>1</span>Согласовываем дату и формат осмотра</div>
+            <div class="step"><span>2</span>Инженер выезжает на объект с оборудованием</div>
+            <div class="step"><span>3</span>Фиксируем дефекты в чек-листе и фотоотчёте</div>
+            <div class="step"><span>4</span>Передаём документы и план устранения</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="reviews">
+        <div class="container">
+          <h2>Отзывы клиентов</h2>
+          <div class="reviews">
+            <blockquote>
+              «Нашли 27 замечаний, которые мы бы сами не заметили. Застройщик всё исправил за 2
+              недели.»
+              <cite>— Анна, ЖК “Скандинавия”</cite>
+            </blockquote>
+            <blockquote>
+              «Очень чётко и по делу. Отчёт с фото отправили в тот же день, приняли квартиру без
+              нервов.»
+              <cite>— Дмитрий, ЖК “Символ”</cite>
+            </blockquote>
+          </div>
+        </div>
       </section>
     </main>
 
-    <footer>
-      <p>© <span id="year"></span> Мой сайт</p>
+    <footer class="footer">
+      <div class="container footer__inner">
+        <div>
+          <strong>Аудит Новостройки</strong>
+          <p>Профессиональная приёмка квартир и техническое сопровождение.</p>
+        </div>
+        <div>
+          <p>Телефон: +7 (999) 123-45-67</p>
+          <p>Email: hello@audit-novostroy.ru</p>
+          <p>© <span id="year"></span> Все права защищены</p>
+        </div>
+      </div>
     </footer>
 
     <script src="script.js"></script>
