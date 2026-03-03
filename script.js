@@ -4,8 +4,11 @@ if (yearElement) yearElement.textContent = new Date().getFullYear();
 const form = document.getElementById('lead-form');
 const leadStatus = document.getElementById('lead-status');
 
+// Используем ID endpoint FormSubmit (без явного email в URL)
+const FORMSUBMIT_ENDPOINT = 'https://formsubmit.co/ajax/d10ef71fed428e18c698b79eb2ca5a69';
+
 const sendLeadToEmail = async (payload) => {
-  const response = await fetch('https://formsubmit.co/ajax/lisica.i.v@gmail.com', {
+  const response = await fetch(FORMSUBMIT_ENDPOINT, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -22,6 +25,14 @@ const sendLeadToEmail = async (payload) => {
   if (result.success !== 'true' && result.success !== true) {
     throw new Error('Ошибка отправки');
   }
+};
+
+const openMailFallback = ({ name, phone, district }) => {
+  const subject = encodeURIComponent('Новая заявка с лендинга');
+  const body = encodeURIComponent(
+    `Имя: ${name}\nТелефон: ${phone}\nЖК / адрес: ${district || '-'}\nИсточник: лендинг`,
+  );
+  window.location.href = `mailto:lisica.i.v@gmail.com?subject=${subject}&body=${body}`;
 };
 
 if (form) {
@@ -54,8 +65,10 @@ if (form) {
       form.reset();
     } catch (error) {
       if (leadStatus) {
-        leadStatus.textContent = 'Не удалось отправить автоматически. Напишите на lisica.i.v@gmail.com.';
+        leadStatus.textContent =
+          'Авто-отправка недоступна. Откроем письмо в вашей почтовой программе.';
       }
+      openMailFallback({ name, phone, district });
     } finally {
       if (submitButton) submitButton.disabled = false;
     }
