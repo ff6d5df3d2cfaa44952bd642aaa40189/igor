@@ -1,12 +1,64 @@
 const yearElement = document.getElementById('year');
 if (yearElement) yearElement.textContent = new Date().getFullYear();
 
-const form = document.querySelector('.lead-form');
+const form = document.getElementById('lead-form');
+const leadStatus = document.getElementById('lead-status');
+
+const sendLeadToEmail = async (payload) => {
+  const response = await fetch('https://formsubmit.co/ajax/lisica.i.v@gmail.com', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    },
+    body: JSON.stringify(payload),
+  });
+
+  if (!response.ok) {
+    throw new Error('Ошибка отправки');
+  }
+
+  const result = await response.json();
+  if (result.success !== 'true' && result.success !== true) {
+    throw new Error('Ошибка отправки');
+  }
+};
+
 if (form) {
-  form.addEventListener('submit', (event) => {
+  form.addEventListener('submit', async (event) => {
     event.preventDefault();
-    alert('Заявка принята. Подготовим план проверки и свяжемся с вами.');
-    form.reset();
+
+    const submitButton = form.querySelector('button[type="submit"]');
+    const formData = new FormData(form);
+
+    const name = String(formData.get('name') || '').trim();
+    const phone = String(formData.get('phone') || '').trim();
+    const district = String(formData.get('district') || '').trim();
+
+    if (leadStatus) {
+      leadStatus.textContent = 'Отправляем заявку...';
+    }
+    if (submitButton) submitButton.disabled = true;
+
+    try {
+      await sendLeadToEmail({
+        name,
+        phone,
+        district,
+        _subject: 'Новая заявка с лендинга',
+      });
+
+      if (leadStatus) {
+        leadStatus.textContent = 'Заявка отправлена. Мы свяжемся с вами в ближайшее время.';
+      }
+      form.reset();
+    } catch (error) {
+      if (leadStatus) {
+        leadStatus.textContent = 'Не удалось отправить автоматически. Напишите на lisica.i.v@gmail.com.';
+      }
+    } finally {
+      if (submitButton) submitButton.disabled = false;
+    }
   });
 }
 

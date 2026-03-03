@@ -93,30 +93,18 @@
       </section>
 
 
-      <section class="panel" id="writs">
-        <h2><span>ИСПОЛНИТЕЛЬНЫЕ ЛИСТЫ</span> по спорам с застройщиками</h2>
-        <p class="muted">Примеры документов по делам о взыскании стоимости устранения строительных недостатков.</p>
-        <div class="writs-grid">
-          <figure class="writ-card">
-            <img src="assets/executive-sheet-1.svg" alt="Исполнительный лист по арбитражному делу о дефектах отделки" />
-            <figcaption>Арбитражный спор: взыскание стоимости устранения дефектов отделки.</figcaption>
-          </figure>
-          <figure class="writ-card">
-            <img src="assets/executive-sheet-2.svg" alt="Исполнительный лист по гражданскому делу о дефектах квартиры" />
-            <figcaption>Гражданский спор: компенсация за дефекты и просрочку исправлений.</figcaption>
-          </figure>
-        </div>
-      </section>
+      
 
       <section class="panel" id="lead">
         <h2><span>ОСТАВИТЬ ЗАЯВКУ</span> на экспресс-аудит</h2>
-        <form class="lead-form reveal">
+        <form class="lead-form reveal" id="lead-form">
           <input type="text" name="name" placeholder="Имя" required />
           <input type="tel" name="phone" placeholder="Телефон" required />
           <input type="text" name="district" placeholder="ЖК / адрес" />
           <button class="btn" type="submit">Отправить</button>
         </form>
         <p class="muted">Нажимая кнопку, вы соглашаетесь на обработку персональных данных.</p>
+        <p class="muted" id="lead-status" aria-live="polite"></p>
       </section>
     </main>
 

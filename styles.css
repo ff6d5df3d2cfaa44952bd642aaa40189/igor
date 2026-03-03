@@ -224,31 +224,6 @@ input {
   font-size: 0.85rem;
 }
 
-.writs-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.8rem;
-}
-
-.writ-card {
-  margin: 0;
-  border: 1px solid #000;
-  background: #fff;
-  padding: 0.6rem;
-}
-
-.writ-card img {
-  display: block;
-  width: 100%;
-  height: auto;
-  border: 1px solid #000;
-}
-
-.writ-card figcaption {
-  margin-top: 0.45rem;
-  font-size: 0.72rem;
-}
-
 .modal {
   position: fixed;
   inset: 0;
@@ -359,7 +334,6 @@ input {
   .service-grid,
   .panel--collage,
   .lead-form,
-  .writs-grid,
   .modal__gallery {
     grid-template-columns: 1fr;
     grid-template-areas: unset;
