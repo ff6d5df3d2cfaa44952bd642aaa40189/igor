@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Приёмка новостройки — архитектурный аудит</title>
+    <title>AuditNovostroy — передача квартиры под контролем</title>
     <meta
       name="description"
-      content="Плакатный лендинг сервиса приёмки квартир: дефекты, отчёты, сопровождение и защита интересов покупателя."
+      content="Передача квартиры без риска подписать лишнее: приёмка, документы, дорожная карта и эксперт по вашему ЖК."
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
@@ -14,89 +14,170 @@
     <div class="poster-grid" aria-hidden="true"></div>
 
     <header class="masthead container" id="top">
-      <div class="cutline reveal">Независимая инженерная проверка</div>
+      <div class="cutline reveal">Управление передачей квартиры: приёмка → документы → результат</div>
       <h1>
-        <span class="label invert swing">ПРИЁМКА</span>
-        <span class="label">КВАРТИР</span>
-        <span class="label invert swing delay-2">В НОВОСТРОЙКАХ</span>
+        <span class="label invert swing">ПЕРЕДАЧА КВАРТИРЫ</span>
+        <span class="label">БЕЗ РИСКА</span>
+        <span class="label invert swing delay-2">ПОДПИСАТЬ ЛИШНЕЕ</span>
       </h1>
       <p class="lead reveal delay-1">
-        От «массового жилья» к качественной среде: фиксируем дефекты, составляем акт и
-        сопровождаем вас до устранения замечаний застройщиком.
+        Подбираем эксперта по вашему ЖК, фиксируем дефекты, готовим документы и даём понятный
+        план действий после приёмки: устранение или юридический путь к компенсации.
       </p>
       <div class="actions reveal delay-2">
-        <a class="btn" href="#lead">Запросить аудит</a>
-        <a class="btn btn--ghost" href="#services">Программа проверки</a>
+        <a class="btn" href="#experts">Подобрать эксперта по ЖК</a>
+        <a class="btn btn--ghost" href="#lead">Записаться / рассчитать стоимость</a>
+        <a class="btn btn--ghost" href="#situations">Что делать после приёмки</a>
       </div>
     </header>
 
     <main class="container layout">
-      <section class="panel panel--hero" id="services">
-        <h2><span>КОНФЕРЕНЦИЯ ФАКТОВ:</span> что проверяем</h2>
-        <div class="service-grid">
-          <article class="tile cutout floaty">
-            <h3>Геометрия и отделка</h3>
-            <p>Стены, стяжка, отклонения плоскостей, качество финиша и примыканий.</p>
+      <section class="panel" id="situations">
+        <h2><span>СИТУАЦИИ КЛИЕНТА</span> что делать в первую очередь</h2>
+        <div class="simple-grid simple-grid--3">
+          <article class="tile cutout">
+            <h3>Меня торопят подписать акт</h3>
+            <p>Разберём, какие документы безопасно подписывать, а какие — только с оговорками.</p>
+            <a class="text-link" href="#lead">Получить алгоритм</a>
           </article>
-          <article class="tile cutout floaty delay-1">
-            <h3>Окна и двери</h3>
-            <p>Герметичность, фурнитура, перекосы, продувания и теплопотери.</p>
+          <article class="tile cutout">
+            <h3>Застройщик говорит: “это норма”</h3>
+            <p>Покажем, где действительно норма, а где зафиксированный недостаток с основанием.</p>
+            <a class="text-link" href="#cases">Посмотреть кейсы</a>
           </article>
-          <article class="tile cutout floaty delay-2">
-            <h3>Инженерные сети</h3>
-            <p>Электрика, вентиляция, водоснабжение, радиаторы и точки подключения.</p>
+          <article class="tile cutout">
+            <h3>После приёмки не понимаю, что дальше</h3>
+            <p>Составим дорожную карту: сроки, документы, повторная проверка и юридические шаги.</p>
+            <a class="text-link" href="#roadmap">Открыть дорожную карту</a>
           </article>
         </div>
       </section>
 
-      <section class="panel panel--collage" id="benefits">
+      <section class="panel" id="experts">
+        <h2><span>ВЫБОР ЭКСПЕРТА</span> вы заранее знаете, кто приедет</h2>
+        <div class="simple-grid simple-grid--3">
+          <article class="expert-card">
+            <h3>Иван Петров</h3>
+            <p>312 приёмок · ПИК / Самолёт · отделка и white box</p>
+            <p class="muted">Сильные стороны: окна, инженерные сети, спорные акты.</p>
+            <a class="text-link" href="#lead">Выбрать эксперта</a>
+          </article>
+          <article class="expert-card">
+            <h3>Мария Лебедева</h3>
+            <p>267 приёмок · А101 / ФСК · квартиры без отделки</p>
+            <p class="muted">Сильные стороны: геометрия, стяжка, вентиляция.</p>
+            <a class="text-link" href="#lead">Выбрать эксперта</a>
+          </article>
+          <article class="expert-card">
+            <h3>Сергей Орлов</h3>
+            <p>354 приёмки · MR / Донстрой · бизнес-класс</p>
+            <p class="muted">Сильные стороны: сложные дефекты, повторная приёмка.</p>
+            <a class="text-link" href="#lead">Выбрать эксперта</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="panel" id="roadmap">
+        <h2><span>ДОРОЖНАЯ КАРТА</span> 5 шагов до результата</h2>
+        <ol class="steps">
+          <li class="reveal">Бриф: ЖК, застройщик, отделка, дата передачи.</li>
+          <li class="reveal delay-1">Подбор эксперта и подтверждение выезда.</li>
+          <li class="reveal delay-2">Приёмка и фиксация дефектов с фото.</li>
+          <li class="reveal delay-3">Передача ведомости + что подписывать и когда.</li>
+          <li class="reveal delay-3">Следующий шаг: контроль устранения или юридический сценарий.</li>
+        </ol>
+      </section>
+
+      <section class="panel" id="result">
+        <h2><span>ЧТО ВЫ ПОЛУЧАЕТЕ</span> после выезда эксперта</h2>
+        <div class="simple-grid simple-grid--2">
+          <ul class="check-list">
+            <li>Фотофиксация нарушений и ведомость дефектов</li>
+            <li>Рекомендации: что подписывать / что не подписывать</li>
+            <li>План действий со сроками до следующего шага</li>
+          </ul>
+          <ul class="check-list">
+            <li>Один контакт на сопровождение процесса</li>
+            <li>Контроль устранения замечаний</li>
+            <li>Маршрут к юридическому сопровождению при отказе застройщика</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="panel panel--collage" id="cases">
         <button
           type="button"
           class="news photo-a case-trigger"
-          data-case-title="Кейс: Приёмка квартиры с отделкой (ЖК Северный)"
+          data-case-title="Кейс: Приёмка квартиры с отделкой"
           data-case-checklist="Геометрия стен и пола|Оконные блоки и примыкания|Вентиляция кухни и санузла|Электроточки и заземление|Качество плитки в мокрых зонах"
           data-case-images="assets/violation-finish-window.svg|assets/violation-finish-tile.svg"
           data-case-issues="Обнаружены: отклонение стены до 14 мм, 2 продувания по створкам, нерабочая вытяжка, скол плитки и отсутствие заземления в 1 розетке."
-          aria-label="Открыть кейс проверки жилого дома"
+          aria-label="Открыть кейс квартиры с отделкой"
         ></button>
         <button
           type="button"
           class="news photo-b case-trigger"
-          data-case-title="Кейс: Приёмка квартиры без отделки (ЖК Центральный)"
+          data-case-title="Кейс: Приёмка квартиры без отделки"
           data-case-checklist="Вертикальность несущих стен|Перепады стяжки по маякам|Вводы инженерных сетей|Остекление лоджии|Запорная арматура отопления"
           data-case-images="assets/violation-raw-wall.svg|assets/violation-raw-screed.svg"
           data-case-issues="Обнаружены: отклонение несущей стены до 15 мм, перепад стяжки до 18 мм, дефект уплотнителя стеклопакета, запотевание лоджии и некомплект арматуры."
-          aria-label="Открыть кейс проверки высотного ЖК"
+          aria-label="Открыть кейс квартиры без отделки"
         ></button>
         <article class="fact black reveal">
           <span class="big">3500+</span>
-          <p>квартир проверено экспертами</p>
+          <p>квартир проверено</p>
         </article>
         <article class="fact reveal delay-1">
           <span class="big">24ч</span>
-          <p>на выпуск подробного отчёта</p>
+          <p>на полный пакет документов</p>
         </article>
         <article class="fact black reveal delay-2">
           <span class="big">95%</span>
-          <p>дефектов устраняются после акта</p>
+          <p>устранений после акта</p>
         </article>
       </section>
 
-      <section class="panel" id="process">
-        <h2><span>СЦЕНАРИЙ ПРОВЕРКИ</span> / 4 шага</h2>
-        <ol class="steps">
-          <li class="reveal">Бриф и согласование даты осмотра.</li>
-          <li class="reveal delay-1">Выезд инженера с измерительным комплектом.</li>
-          <li class="reveal delay-2">Фотофиксация + ведомость замечаний.</li>
-          <li class="reveal delay-3">Передача отчёта и рекомендации по претензии.</li>
-        </ol>
+      <section class="panel" id="pricing">
+        <h2><span>ТАРИФЫ</span> честно по сценариям</h2>
+        <div class="simple-grid simple-grid--3">
+          <article class="price-card">
+            <h3>Фиксация</h3>
+            <p>Сильная приёмка + дефектная ведомость + фотоотчёт.</p>
+            <strong>от 7 000 ₽</strong>
+          </article>
+          <article class="price-card">
+            <h3>Защита на приёмке</h3>
+            <p>Фиксация + документальная дисциплина + сопровождение диалога.</p>
+            <strong>от 11 000 ₽</strong>
+          </article>
+          <article class="price-card">
+            <h3>Под ключ до результата</h3>
+            <p>Приёмка + контроль устранения + юридический план.</p>
+            <strong>по сценарию</strong>
+          </article>
+        </div>
       </section>
 
-
-      
+      <section class="panel" id="faq">
+        <h2><span>FAQ</span> по главным страхам</h2>
+        <div class="faq-list">
+          <details open>
+            <summary>Что делать, если меня торопят подписать акт?</summary>
+            <p>Не подписывать без фиксации замечаний. На выезде даём безопасный порядок подписания.</p>
+          </details>
+          <details>
+            <summary>Если застройщик не устраняет дефекты, что дальше?</summary>
+            <p>Переходим к следующему сценарию: контроль сроков, повторная фиксация и юридический маршрут.</p>
+          </details>
+          <details>
+            <summary>Можно ли сразу выбрать эксперта по моему ЖК?</summary>
+            <p>Да, подбираем по застройщику, отделке и типовым дефектам вашего объекта.</p>
+          </details>
+        </div>
+      </section>
 
       <section class="panel" id="lead">
-        <h2><span>ОСТАВИТЬ ЗАЯВКУ</span> на экспресс-аудит</h2>
+        <h2><span>ЗАПИСЬ</span> на приёмку / консультацию</h2>
         <form class="lead-form reveal" id="lead-form">
           <input type="text" name="name" placeholder="Имя" required />
           <input type="tel" name="phone" placeholder="Телефон" required />
@@ -122,8 +203,8 @@
 
     <footer class="container footer" id="contacts">
       <div>
-        <strong>АРХИВ КАЧЕСТВА ЖИЛЬЯ</strong>
-        <p>Телефон: +7 (999) 000-00-00 · Email: info@expert-priemka.ru</p>
+        <strong>AUDITNOVOSTROY</strong>
+        <p>Приёмка · документы · дорожная карта · сопровождение</p>
       </div>
       <p>© <span id="year"></span></p>
     </footer>
