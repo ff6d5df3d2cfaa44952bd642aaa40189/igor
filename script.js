@@ -1,11 +1,9 @@
 const yearElement = document.getElementById('year');
 if (yearElement) yearElement.textContent = new Date().getFullYear();
 
-const form = document.getElementById('lead-form');
-const leadStatus = document.getElementById('lead-status');
 const FORMSUBMIT_ENDPOINT = 'https://formsubmit.co/ajax/d10ef71fed428e18c698b79eb2ca5a69';
 
-const sendLeadToEmail = async (payload) => {
+const sendLead = async (payload) => {
   const response = await fetch(FORMSUBMIT_ENDPOINT, {
     method: 'POST',
     headers: {
@@ -15,208 +13,96 @@ const sendLeadToEmail = async (payload) => {
     body: JSON.stringify(payload),
   });
 
-  if (!response.ok) throw new Error('Ошибка отправки');
+  if (!response.ok) {
+    throw new Error('send_failed');
+  }
 
   const result = await response.json();
   if (result.success !== 'true' && result.success !== true) {
-    throw new Error('Ошибка отправки');
+    throw new Error('send_failed');
   }
 };
 
-const openMailFallback = ({ name, phone, district }) => {
-  const subject = encodeURIComponent('Новая заявка с лендинга');
+const openMailFallback = (payload) => {
+  const subject = encodeURIComponent('Новая заявка с лендинга AuditNovostroy');
   const body = encodeURIComponent(
-    `Имя: ${name}\nТелефон: ${phone}\nЖК / адрес: ${district || '-'}\nИсточник: лендинг`,
+    Object.entries(payload)
+      .map(([key, value]) => `${key}: ${value || '-'}`)
+      .join('\n'),
   );
   window.location.href = `mailto:lisica.i.v@gmail.com?subject=${subject}&body=${body}`;
 };
 
-if (form) {
+const forms = document.querySelectorAll('.js-lead-form');
+forms.forEach((form) => {
+  const phoneInput = form.querySelector('input[name="phone"]');
+  const submitButton = form.querySelector('button[type="submit"]');
+  const status = form.querySelector('.status');
+  const successId = form.dataset.success;
+  const successNode = successId ? document.getElementById(successId) : null;
+
+  const setSubmitState = () => {
+    if (!submitButton || !phoneInput) return;
+    submitButton.disabled = !phoneInput.value.trim();
+  };
+
+  setSubmitState();
+  if (phoneInput) {
+    phoneInput.addEventListener('input', () => {
+      form.classList.remove('error');
+      setSubmitState();
+    });
+  }
+
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
 
-    const submitButton = form.querySelector('button[type="submit"]');
     const formData = new FormData(form);
+    const payload = Object.fromEntries(formData.entries());
+    const phone = String(payload.phone || '').trim();
 
-    const name = String(formData.get('name') || '').trim();
-    const phone = String(formData.get('phone') || '').trim();
-    const district = String(formData.get('district') || '').trim();
+    if (!phone) {
+      form.classList.add('error');
+      if (status) status.textContent = 'Проверьте телефон: поле обязательно для отправки.';
+      setSubmitState();
+      return;
+    }
 
-    if (leadStatus) leadStatus.textContent = 'Отправляем заявку...';
-    if (submitButton) submitButton.disabled = true;
+    const defaultLabel = submitButton ? submitButton.dataset.defaultLabel || submitButton.textContent : '';
+    if (submitButton) {
+      submitButton.disabled = true;
+      submitButton.textContent = 'Отправляем...';
+    }
+    if (status) status.textContent = 'Отправляем заявку...';
 
     try {
-      await sendLeadToEmail({
-        name,
-        phone,
-        district,
-        _subject: 'Новая заявка с лендинга',
+      await sendLead({
+        ...payload,
+        _subject: 'Новая заявка с лендинга AuditNovostroy',
       });
-      if (leadStatus) {
-        leadStatus.textContent = 'Заявка отправлена. Мы свяжемся с вами в ближайшее время.';
-      }
+      if (status) status.textContent = '';
+      if (successNode) successNode.hidden = false;
       form.reset();
+      setSubmitState();
     } catch {
-      if (leadStatus) {
-        leadStatus.textContent =
-          'Авто-отправка недоступна. Откроем письмо в вашей почтовой программе.';
-      }
-      openMailFallback({ name, phone, district });
+      if (status) status.textContent = 'Авто-отправка недоступна. Откроем письмо в вашей почте.';
+      openMailFallback(payload);
     } finally {
-      if (submitButton) submitButton.disabled = false;
+      if (submitButton) submitButton.textContent = defaultLabel;
+      setSubmitState();
     }
   });
-}
 
-const caseModal = document.getElementById('case-modal');
-const titleElement = document.getElementById('case-title');
-const checklistElement = document.getElementById('case-checklist');
-const issuesElement = document.getElementById('case-issues');
-const galleryElement = document.getElementById('case-gallery');
-const closeCaseButtons = document.querySelectorAll('[data-close-modal]');
-const caseTriggers = document.querySelectorAll('.case-trigger');
-
-const fillChecklist = (items) => {
-  if (!checklistElement) return;
-  checklistElement.innerHTML = '';
-  items.forEach((item) => {
-    const li = document.createElement('li');
-    li.textContent = item;
-    checklistElement.appendChild(li);
-  });
-};
-
-const fillGallery = (images, title) => {
-  if (!galleryElement) return;
-  galleryElement.innerHTML = '';
-  images.forEach((src, index) => {
-    const img = document.createElement('img');
-    img.src = src;
-    img.alt = `${title}: фото нарушения ${index + 1}`;
-    galleryElement.appendChild(img);
-  });
-};
-
-const openCaseModal = (trigger) => {
-  if (!caseModal || !titleElement || !issuesElement) return;
-
-  const title = trigger.dataset.caseTitle || 'Кейс проверки';
-  const checklist = (trigger.dataset.caseChecklist || '').split('|').filter(Boolean);
-  const images = (trigger.dataset.caseImages || '').split('|').filter(Boolean);
-
-  titleElement.textContent = title;
-  fillChecklist(checklist);
-  fillGallery(images, title);
-  issuesElement.textContent = trigger.dataset.caseIssues || '';
-
-  caseModal.classList.add('is-open');
-  caseModal.setAttribute('aria-hidden', 'false');
-  document.body.style.overflow = 'hidden';
-};
-
-const closeCaseModal = () => {
-  if (!caseModal) return;
-  caseModal.classList.remove('is-open');
-  caseModal.setAttribute('aria-hidden', 'true');
-  document.body.style.overflow = '';
-};
-
-caseTriggers.forEach((trigger) => {
-  trigger.addEventListener('click', () => openCaseModal(trigger));
+  if (submitButton) {
+    submitButton.dataset.defaultLabel = submitButton.textContent;
+  }
 });
 
-closeCaseButtons.forEach((button) => {
-  button.addEventListener('click', closeCaseModal);
-});
-
-// Каталог сданных ЖК на главной
-const jkCatalogList = document.getElementById('jk-catalog-home-list');
-const jkCatalogStatus = document.getElementById('jk-catalog-home-status');
-
-const jkModal = document.getElementById('jk-modal');
-const jkModalTitle = document.getElementById('jk-modal-title');
-const jkModalImage = document.getElementById('jk-modal-image');
-const jkModalDeveloper = document.getElementById('jk-modal-developer');
-const jkModalLocation = document.getElementById('jk-modal-location');
-const jkModalLink = document.getElementById('jk-modal-link');
-const closeJkButtons = document.querySelectorAll('[data-close-jk-modal]');
-
-const closeJkModal = () => {
-  if (!jkModal) return;
-  jkModal.classList.remove('is-open');
-  jkModal.setAttribute('aria-hidden', 'true');
-  document.body.style.overflow = '';
-};
-
-const openJkModal = (item) => {
-  if (!jkModal || !jkModalTitle || !jkModalImage || !jkModalDeveloper || !jkModalLocation || !jkModalLink) {
-    return;
-  }
-
-  jkModalTitle.textContent = item.title || 'Жилой комплекс';
-  const image = item.local_image || item.image_url;
-  jkModalImage.src = image || '/assets/violation-finish-window.svg';
-  jkModalImage.alt = item.title || 'ЖК';
-  jkModalDeveloper.textContent = item.developer || 'Застройщик уточняется';
-  jkModalLocation.textContent = item.location || 'Москва / МО';
-  jkModalLink.href = item.source_url || '#';
-
-  jkModal.classList.add('is-open');
-  jkModal.setAttribute('aria-hidden', 'false');
-  document.body.style.overflow = 'hidden';
-};
-
-closeJkButtons.forEach((btn) => btn.addEventListener('click', closeJkModal));
-
-const renderJkCatalog = (items) => {
-  if (!jkCatalogList) return;
-  jkCatalogList.innerHTML = '';
-
-  items.slice(0, 9).forEach((item) => {
-    const card = document.createElement('article');
-    card.className = 'card';
-    const previewImage = item.local_image || item.image_url;
-    card.innerHTML = `
-      ${previewImage ? `<img class="jk-thumb" src="${previewImage}" alt="${item.title || 'ЖК'}" />` : '<div class="tag">Фото временно недоступно</div>'}
-      <h3>${item.title || 'ЖК'}</h3>
-      <p>Застройщик: ${item.developer || 'уточняется'}</p>
-      <p>Локация: ${item.location || 'Москва / МО'}</p>
-      <button type="button" class="btn btn--ghost">Открыть карточку</button>
-    `;
-
-    const button = card.querySelector('button');
-    if (button) {
-      button.addEventListener('click', () => openJkModal(item));
-    }
-
-    jkCatalogList.appendChild(card);
+const faqQuestions = document.querySelectorAll('.faq-q');
+faqQuestions.forEach((button) => {
+  button.addEventListener('click', () => {
+    const item = button.closest('.faq-item');
+    if (!item) return;
+    item.classList.toggle('open');
   });
-};
-
-const loadJkCatalog = async () => {
-  if (!jkCatalogList) return;
-  try {
-    const response = await fetch('/data/jk_catalog.json', { cache: 'no-store' });
-    if (!response.ok) throw new Error('Не удалось загрузить каталог');
-
-    const data = await response.json();
-    renderJkCatalog(Array.isArray(data.items) ? data.items : []);
-
-    if (jkCatalogStatus) {
-      const status = data.source_ok ? 'данные обновлены автоматически' : 'показаны кэш-данные';
-      jkCatalogStatus.textContent = `Каталог: ${status}. Обновлено: ${data.updated_at || 'н/д'}`;
-    }
-  } catch {
-    if (jkCatalogStatus) {
-      jkCatalogStatus.textContent = 'Каталог временно недоступен. Попробуйте позже.';
-    }
-  }
-};
-
-loadJkCatalog();
-
-window.addEventListener('keydown', (event) => {
-  if (event.key !== 'Escape') return;
-  closeCaseModal();
-  closeJkModal();
 });
