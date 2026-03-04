@@ -3,106 +3,50 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PR BAND — пиксельный лендинг</title>
+    <title>PR BAND — 2026</title>
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
-    <main class="retro-page">
-      <section class="hero container">
-        <div class="brand-block pixel-card">
-          <p class="logo">PR<br />BAND</p>
-          <p class="sub">АНАСТАСИИ ГОГОЛЬ</p>
+    <main class="poster" id="poster">
+      <header class="top-copy">
+        <h1>PR BAND</h1>
+        <p class="line-a">ПОМОЖЕМ АРТИСТУ ПРОЯВИТЬСЯ В ПОЛНОЙ МЕРЕ</p>
+        <p class="line-b">БРЕНД-МЕНЕДЖМЕНТ<br />SMM И МАРКЕТИНГ<br />МЕНЕДЖМЕНТ АРТИСТА</p>
+      </header>
+
+      <section class="arena" aria-label="Игровая сцена продвижения">
+        <div class="skyline">
+          <div class="tower" aria-label="Останкинская башня"></div>
         </div>
-        <div class="hero-title pixel-card">
-          <h1>18 ЛЕТ РАБОТЫ В МУЗЫКАЛЬНОЙ ИНДУСТРИИ</h1>
-          <p class="hero-list">PR БРЕНД-МЕНЕДЖМЕНТ<br />SMM И МАРКЕТИНГ<br />МЕНЕДЖМЕНТ АРТИСТА</p>
-          <p class="tiny">/НАШИ АРТИСТЫ МАРСЕЛЬ, JUKEBOX TRIO, ЖЕНЯ ЛЮБИЧ</p>
+
+        <div class="pacman" id="pacman" aria-label="Пакмен"></div>
+        <div class="ghost ghost--c" id="ghost-c"></div>
+        <div class="ghost ghost--o" id="ghost-o"></div>
+        <div class="ghost ghost--r" id="ghost-r"></div>
+
+        <div class="kong" id="kong" aria-label="Кинг-Конг">
+          <div class="kong__face"></div>
         </div>
-        <div class="hero-image pixel-card">
-          <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80" alt="Основатель агентства" />
-          <p class="tiny corner">АНАСТАСИЯ ГОГОЛЬ<br />ОСНОВАТЕЛЬ АГЕНТСТВА</p>
-        </div>
+
+        <div class="barrel barrel--1"></div>
+        <div class="barrel barrel--2"></div>
+        <div class="barrel barrel--3"></div>
       </section>
 
-      <section class="container intro pixel-card">
-        <h2>ПОМОЖЕМ АРТИСТУ ПРОЯВИТЬСЯ В ПОЛНОЙ МЕРЕ, СОХРАНИВ СВОЮ УНИКАЛЬНОСТЬ И НЕ ПОДСТРАИВАЯСЬ ПОД ШАБЛОНЫ РЫНКА</h2>
-        <p>ПОЛНЫЙ КОМПЛЕКС PR-УСЛУГ ДЛЯ ПРОДВИЖЕНИЯ АРТИСТОВ, РЕЛИЗОВ, КОНЦЕРТОВ И ДРУГИХ ПРОЕКТОВ МУЗЫКАЛЬНОЙ ИНДУСТРИИ И СФЕРЫ КУЛЬТУРЫ</p>
-        <p class="tiny joke">Москва любит дедлайны, Питер любит дождь, а мы любим, когда у артиста sold out и мемы в комментариях.</p>
+      <div class="cta-bubble">ЗАПУСТИТЬ ПРОДВИЖЕНИЕ</div>
+
+      <section class="controls">
+        <button id="auto-btn" class="ctrl">АВТО-КНОПКА</button>
+        <button id="arcade-btn" class="ctrl">КНОПКА START</button>
+        <button id="lever" class="lever" aria-label="Рычажок запуска">
+          <span class="lever__stick"></span>
+          <span class="lever__base"></span>
+        </button>
       </section>
 
-      <section class="container clients">
-        <h3>НАШИ КЛИЕНТЫ</h3>
-        <div class="clients-grid">
-          <article class="client-card"><img src="https://images.unsplash.com/photo-1488161628813-04466f872be2?auto=format&fit=crop&w=900&q=80" alt="Марсель" /><p>МАРСЕЛЬ<br />PR, СММ, МЕНЕДЖМЕНТ</p></article>
-          <article class="client-card"><img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=900&q=80" alt="Женя Любич" /><p>ЖЕНЯ ЛЮБИЧ<br />PR, МЕНЕДЖМЕНТ, СММ</p></article>
-          <article class="client-card"><img src="https://images.unsplash.com/photo-1521336575822-6da63fb45455?auto=format&fit=crop&w=900&q=80" alt="Jukebox Trio" /><p>JUKEBOX TRIO<br />PR И СММ</p></article>
-          <article class="client-card"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=900&q=80" alt="Дмитрий Кончаковский" /><p>ДМИТРИЙ КОНЧАКОВСКИЙ<br />PR, СММ, ЛИЧНЫЙ БРЕНД</p></article>
-        </div>
-      </section>
-
-      <section class="container services">
-        <h3>УСЛУГИ ДЛЯ АРТИСТОВ</h3>
-        <div class="service-grid">
-          <article class="pixel-card">/ 01<br /><strong>PR-СОПРОВОЖДЕНИЕ «ПОД КЛЮЧ»</strong></article>
-          <article class="pixel-card">/ 02<br /><strong>PR КОНЦЕРТОВ И СПЕЦИАЛЬНЫХ МЕРОПРИЯТИЙ</strong></article>
-          <article class="pixel-card">/ 03<br /><strong>ПРОДВИЖЕНИЕ РЕЛИЗОВ: ПЕСНЯ / КЛИП / АЛЬБОМ</strong></article>
-          <article class="pixel-card">/ 04<br /><strong>КОНСУЛЬТАЦИЯ: ПРОДВИЖЕНИЕ, PR И СММ</strong></article>
-          <article class="pixel-card">/ 05<br /><strong>СЪЕМКИ: РИЛСОВ / СНИППЕТОВ</strong></article>
-          <article class="pixel-card">/ 06<br /><strong>СММ</strong></article>
-        </div>
-      </section>
-
-      <section class="container venue pixel-card">
-        <div>
-          <p class="tiny">ПРОДВИЖЕНИЕ ПЛОЩАДОК</p>
-          <ul>
-            <li>СТРАТЕГИЯ РАЗВИТИЯ БРЕНДА</li>
-            <li>ПОВЫШЕНИЕ УЗНАВАЕМОСТИ ПЛОЩАДКИ</li>
-            <li>КОММУНИКАЦИЯ С ПАРТНЕРАМИ</li>
-            <li>SMM И REELS</li>
-            <li>РАЗРАБОТКА И КОНТРОЛЬ РЕКЛАМНЫХ КАМПАНИЙ</li>
-          </ul>
-        </div>
-        <div>
-          <p><strong>БОЛЕЕ 300 КОНЦЕРТОВ, СПЕКТАКЛЕЙ И ШОУ. РАБОТАЛИ С ПЛОЩАДКАМИ:</strong><br />16 ТОНН<br />ARCHI LOFT<br />МУЗ ЛАБ И RED STARS CLUB / 2014</p>
-          <img src="https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?auto=format&fit=crop&w=1200&q=80" alt="Концерт" />
-        </div>
-      </section>
-
-      <section class="container dark-zone">
-        <div class="dark-head pixel-card">
-          <div>
-            <p>ПРОШЛЫЕ ПРОЕКТЫ</p>
-            <div class="tags"><span>КОНЦЕРТЫ</span><span>ТУРЫ</span><span>СПЕКТАКЛИ</span><span>ШОУ</span></div>
-          </div>
-          <div>
-            <p><strong>РАБОТА С АРТИСТАМИ:</strong><br />UMA2RMAN, ВИНТАЖ, СТАС ЯРУШИН, ИЛЬЯ ЗУДИН, ЕГОР СЕСАРЕВ, КОНСТАНТИН БИТЕЕВ, ПЕВИЦА МАЛИ, ТЕЛЕВЕДУЩАЯ ИРИНА МУРОМЦЕВА</p>
-            <p><strong>КОНЦЕРТЫ И СПЕКТАКЛИ:</strong><br />"ВАЛЕНТИН СТРЫКАЛО" / ARENA MOSCOW, АЛЕКСАНДР ГРАДСКИЙ / CROCUS CITY HALL. СПЕКТАКЛЬ МКАД МИХАИЛА КОЗЫРЕВА И АЛЕКСА ДУБАСА</p>
-            <p><strong>В РАМКАХ RSP CONCERT И VOLKOV PRO / 2011-2013</strong><br />JAMIROQUAI, CHEMICAL BROTHERS, SEAL, ТАРЬЯ ТУРУНЕН, NOUVELLE VAGUE, MORCHEEBA</p>
-          </div>
-        </div>
-        <div class="past-grid">
-          <article><img src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=700&q=80" alt="UMA2RMAN" /><p>UMA2RMAN<br />РОССИЙСКАЯ РОК-ГРУППА</p></article>
-          <article><img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=700&q=80" alt="Винтаж" /><p>ВИНТАЖ</p></article>
-          <article><img src="https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?auto=format&fit=crop&w=700&q=80" alt="Ирина Муромцева" /><p>ИРИНА МУРОМЦЕВА</p></article>
-          <article><img src="https://images.unsplash.com/photo-1521747116042-5a810fda9664?auto=format&fit=crop&w=700&q=80" alt="Стас Ярушин" /><p>СТАС ЯРУШИН<br />МУЗЫКАЛЬНЫЙ ПРОЕКТ</p></article>
-          <article><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=700&q=80" alt="Александр Градский" /><p>АЛЕКСАНДР ГРАДСКИЙ<br />PR К ВАЖНЫМ КОНЦЕРТАМ</p></article>
-        </div>
-      </section>
-
-      <footer class="container footer pixel-card">
-        <nav>
-          <a href="#">НАШИ КЛИЕНТЫ</a>
-          <a href="#">УСЛУГИ ДЛЯ АРТИСТОВ</a>
-          <a href="#">ПРОДВИЖЕНИЕ ПЛОЩАДОК</a>
-          <a href="#">ПРОШЛЫЕ ПРОЕКТЫ</a>
-        </nav>
-        <div class="contacts">
-          <p>+7 962 969 6570</p>
-          <p>GOGOL_NASTIA@MAIL.RU</p>
-          <p class="tiny">2025. ВСЕ ПРАВА ЗАЩИЩЕНЫ</p>
-        </div>
-      </footer>
+      <footer class="year">2026</footer>
     </main>
+
+    <script src="/script.js"></script>
   </body>
 </html>
