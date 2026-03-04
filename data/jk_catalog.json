@@ -1,0 +1,45 @@
+{
+  "updated_at": "2026-03-03T22:14:20.268265+00:00",
+  "source_url": "https://pronovostroy.ru/novostroyki-sdannye/",
+  "source_ok": false,
+  "error": "fetch failed for https://pronovostroy.ru/novostroyki-sdannye/: <urlopen error Tunnel connection failed: 403 Forbidden>",
+  "count": 3,
+  "items": [
+    {
+      "title": "ЖК Прокшино",
+      "source_url": "https://pronovostroy.ru/",
+      "developer": "Застройщик уточняется",
+      "location": "Москва / МО",
+      "image_url": "",
+      "local_image": "",
+      "price_hint": "уточняется",
+      "deadline_hint": "уточняется",
+      "source": "pronovostroy.ru",
+      "slug": "zhk-prokshino"
+    },
+    {
+      "title": "ЖК Скандинавия",
+      "source_url": "https://pronovostroy.ru/",
+      "developer": "Застройщик уточняется",
+      "location": "Москва / МО",
+      "image_url": "",
+      "local_image": "",
+      "price_hint": "уточняется",
+      "deadline_hint": "уточняется",
+      "source": "pronovostroy.ru",
+      "slug": "zhk-skandinaviya"
+    },
+    {
+      "title": "ЖК Саларьево Парк",
+      "source_url": "https://pronovostroy.ru/",
+      "developer": "Застройщик уточняется",
+      "location": "Москва / МО",
+      "image_url": "",
+      "local_image": "",
+      "price_hint": "уточняется",
+      "deadline_hint": "уточняется",
+      "source": "pronovostroy.ru",
+      "slug": "zhk-salarevo-park"
+    }
+  ]
+}

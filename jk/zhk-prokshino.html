@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Приёмка квартиры в ЖК Прокшино — AuditNovostroy</title>
+    <meta name="description" content="Чек-лист и кейсы по ЖК Прокшино" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="poster-grid" aria-hidden="true"></div>
+    <header class="site-header">
+      <div class="container top-nav">
+        <a class="brand" href="/index.html">AUDITNOVOSTROY</a>
+        <nav class="menu">
+          <a href="/index.html">Главная</a>
+          <a href="/experts/index.html">Эксперты</a>
+          <a href="/situations/what-to-sign.html">Ситуации</a>
+          <a href="/pricing/index.html">Тарифы</a>
+          <a href="/cases/index.html">Кейсы</a>
+          <a href="/legal/index.html">Юр. сопровождение</a>
+          <a href="/booking/index.html">Запись</a>
+        </nav>
+      </div>
+    </header>
+    <main class="container page">
+<section class="panel"><h1><span>ЖК ПРОКШИНО</span> приёмка и типовые дефекты</h1><p>Собрали концентрат из выездов по ЖК: где чаще всего возникают спорные узлы и как лучше готовиться к передаче.</p></section><section class="panel"><h2><span>ТИПОВЫЕ ЗАМЕЧАНИЯ</span></h2><ul class="check-list"><li>Продувание по оконным створкам</li><li>Перепады стяжки и отклонения по стенам</li><li>Слабая тяга вентиляции</li></ul></section>
+<section class="panel cta-panel" id="lead">
+  <h2><span>ЗАПИСЬ</span> на приёмку или консультацию</h2>
+  <p>Оставьте контакты и ЖК — за 15 минут подберём эксперта и предложим сценарий действий.</p>
+  <form class="lead-form" id="lead-form">
+    <input type="text" name="name" placeholder="Имя" required />
+    <input type="tel" name="phone" placeholder="Телефон" required />
+    <input type="text" name="district" placeholder="ЖК / адрес" />
+    <button class="btn" type="submit">Отправить заявку</button>
+  </form>
+  <p class="muted">Нажимая кнопку, вы соглашаетесь с обработкой персональных данных.</p>
+  <p class="muted" id="lead-status" aria-live="polite"></p>
+</section>
+
+    </main>
+
+    <div class="modal" id="case-modal" aria-hidden="true">
+      <div class="modal__backdrop" data-close-modal></div>
+      <div class="modal__content" role="dialog" aria-modal="true" aria-labelledby="case-title">
+        <button class="modal__close" type="button" data-close-modal aria-label="Закрыть">×</button>
+        <h3 id="case-title">Кейс проверки</h3>
+        <p class="modal__subtitle">Чек-лист проверки:</p>
+        <ul id="case-checklist" class="modal__checklist"></ul>
+        <p id="case-issues"></p>
+        <div id="case-gallery" class="modal__gallery"></div>
+      </div>
+    </div>
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <strong>AUDITNOVOSTROY</strong>
+          <p>Передача квартиры под контролем: приёмка, документы, план действий, сопровождение.</p>
+        </div>
+        <div>
+          <p>Телефон: +7 (495) 000-00-00</p>
+          <p>Email: lisica.i.v@gmail.com</p>
+          <p>© <span id="year"></span></p>
+        </div>
+      </div>
+    </footer>
+    <script src="/script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <rect width="1200" height="800" fill="#d9d9d9"/>
+  <rect x="140" y="90" width="920" height="620" fill="#efefef" stroke="#222" stroke-width="8"/>
+  <line x1="600" y1="90" x2="600" y2="710" stroke="#444" stroke-width="6"/>
+  <line x1="140" y1="400" x2="1060" y2="400" stroke="#444" stroke-width="6"/>
+  <path d="M560 180 C620 120, 700 140, 760 200" stroke="#c00" stroke-width="10" fill="none"/>
+  <path d="M550 210 L770 220" stroke="#c00" stroke-width="7"/>
+  <rect x="220" y="520" width="300" height="90" fill="#111"/>
+  <text x="240" y="575" font-size="44" fill="#fff" font-family="Arial">ЩЕЛЬ 4 мм</text>
+  <rect x="630" y="520" width="370" height="90" fill="#111"/>
+  <text x="650" y="575" font-size="40" fill="#fff" font-family="Arial">ПРОДУВАНИЕ</text>
+</svg>
