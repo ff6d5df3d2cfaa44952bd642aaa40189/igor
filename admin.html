@@ -3,35 +3,35 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Game Boy Poster — Админка</title>
+    <title>Админка — Курица на заказ</title>
     <link rel="stylesheet" href="/styles.css" />
   </head>
-  <body class="page page--admin">
-    <main class="admin-panel">
-      <h1>Админка экрана Game Boy</h1>
-      <p>Загрузите картинку — она сразу отобразится на главной странице в экране консоли.</p>
+  <body class="site site--admin">
+    <main class="admin">
+      <header class="page-head">
+        <h1>Админка портфолио</h1>
+        <a class="link" href="/index.html">← На главную</a>
+      </header>
 
-      <form id="upload-form" class="admin-form">
+      <form id="admin-form" class="admin-form">
+        <input id="dish-title" type="text" placeholder="Блюдо" required />
+        <input id="dish-benefit" type="text" placeholder="Преимущество" required />
+        <input id="dish-time" type="text" placeholder="Сколько готовлю (например 45 минут)" required />
+        <input id="dish-price" type="text" placeholder="Цена" required />
         <label class="file-input">
-          <input id="image-input" type="file" accept="image/*" required />
-          <span>Выбрать картинку</span>
+          <input id="dish-image" type="file" accept="image/*" required />
+          <span>Загрузить фото блюда</span>
         </label>
-
-        <button class="btn" type="submit">Сохранить на экран</button>
-        <button class="btn btn--ghost" type="button" id="clear-image">Очистить экран</button>
+        <button class="btn btn--accent" type="submit">Добавить в портфолио</button>
       </form>
 
-      <p id="admin-status" class="admin-status" aria-live="polite"></p>
+      <p id="admin-status" class="status"></p>
 
-      <section class="preview-box">
-        <h2>Предпросмотр</h2>
-        <img id="preview-image" alt="Предпросмотр выбранного изображения" hidden />
-        <p id="preview-placeholder">Пока изображение не выбрано</p>
+      <section>
+        <h2>Текущие карточки</h2>
+        <div id="admin-items" class="admin-items"></div>
       </section>
-
-      <a class="admin-link" href="/index.html">← Вернуться на главную</a>
     </main>
-
     <script src="/script.js"></script>
   </body>
 </html>

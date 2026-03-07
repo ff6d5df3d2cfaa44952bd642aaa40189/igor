@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1100" role="img" aria-label="Счастливый мужчина с курицей">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f0cd45"/>
+      <stop offset="1" stop-color="#e5bf31"/>
+    </linearGradient>
+    <linearGradient id="shirt" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1ed0d3"/>
+      <stop offset="1" stop-color="#13969a"/>
+    </linearGradient>
+    <linearGradient id="skin" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffddb8"/>
+      <stop offset="1" stop-color="#d49b6d"/>
+    </linearGradient>
+    <linearGradient id="chicken" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f7a63a"/>
+      <stop offset="1" stop-color="#c96f1f"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="1100" fill="url(#bg)"/>
+  <ellipse cx="460" cy="1020" rx="250" ry="50" fill="#000" opacity="0.15"/>
+  <circle cx="420" cy="280" r="120" fill="url(#skin)"/>
+  <path d="M300 245c22-120 196-158 256-30-31-20-78-28-120-19-45 9-86 29-136 49z" fill="#231017"/>
+  <circle cx="380" cy="275" r="10" fill="#281520"/>
+  <circle cx="450" cy="275" r="10" fill="#281520"/>
+  <path d="M375 334c23 21 62 21 85 0" fill="none" stroke="#7a4030" stroke-width="8" stroke-linecap="round"/>
+  <rect x="250" y="390" width="360" height="470" rx="70" fill="url(#shirt)"/>
+  <rect x="220" y="520" width="110" height="210" rx="55" fill="url(#skin)"/>
+  <rect x="540" y="520" width="110" height="210" rx="55" fill="url(#skin)"/>
+  <g transform="translate(465 640) rotate(-18)">
+    <ellipse cx="0" cy="0" rx="170" ry="120" fill="url(#chicken)"/>
+    <ellipse cx="-85" cy="-20" rx="70" ry="55" fill="#ffd28a" opacity="0.8"/>
+    <rect x="135" y="-22" width="85" height="44" rx="20" fill="#f4ead8"/>
+    <circle cx="220" cy="0" r="18" fill="#f4ead8"/>
+  </g>
+  <text x="450" y="960" font-size="64" text-anchor="middle" font-family="Arial" font-weight="800" fill="#26131d">СЧАСТЛИВЫЙ ШЕФ</text>
+</svg>

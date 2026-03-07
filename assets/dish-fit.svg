@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="Фитнес-курица">
+  <rect width="800" height="500" fill="#1f3a2a"/>
+  <ellipse cx="400" cy="390" rx="280" ry="70" fill="#000" opacity="0.25"/>
+  <ellipse cx="420" cy="250" rx="190" ry="115" fill="#d88a46"/>
+  <ellipse cx="420" cy="225" rx="110" ry="60" fill="#efb66f" opacity="0.7"/>
+  <circle cx="240" cy="270" r="45" fill="#7bb06f"/>
+  <circle cx="570" cy="290" r="38" fill="#95c978"/>
+  <text x="40" y="70" fill="#d8f0c6" font-size="52" font-family="Arial" font-weight="700">ФИТНЕС-КУРИЦА</text>
+</svg>

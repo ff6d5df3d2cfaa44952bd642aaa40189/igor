@@ -3,37 +3,76 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Game Boy Poster — Главная</title>
+    <title>Курица на заказ — лендинг</title>
     <link rel="stylesheet" href="/styles.css" />
   </head>
-  <body class="page page--poster">
-    <main class="poster-layout">
-      <header class="poster-title">ゲームボーイ</header>
+  <body class="site site--landing">
+    <main class="landing">
+      <header class="hero">
+        <aside class="hero__left">ГОРЯЧО<br />ВКУСНО<br />БЫСТРО</aside>
 
-      <section class="poster-content" aria-label="Ретро постер с Game Boy">
-        <p class="side-copy side-copy--left">激情に注意</p>
+        <section class="hero__center">
+          <p class="badge">доставка 26 минут*</p>
+          <h1>ПРИГОТОВИМ КУРИЦУ ЗА ВАС</h1>
+          <p class="sub">Сочная курица на заказ для дома, офиса и мероприятий.</p>
+          <a class="btn btn--accent" href="#order">Заказать</a>
+        </section>
 
-        <article class="gameboy-photo" aria-label="Фотореалистичный Game Boy с меняемым экраном">
-          <img class="gameboy-photo__base" src="/assets/gameboy-photorealistic.svg" alt="Фотореалистичный корпус Game Boy" />
+        <figure class="hero__image-wrap">
+          <img src="/assets/hero-happy-man-chicken.svg" alt="Счастливый мужчина держит курицу" />
+        </figure>
+      </header>
 
-          <div class="gameboy-photo__screen" id="gameboy-screen" role="img" aria-label="Изображение на экране Game Boy">
-            <img id="screen-image" alt="Загруженное изображение" hidden />
-            <p id="screen-placeholder">Загрузите картинку через админку</p>
-          </div>
-        </article>
-
-        <p class="side-copy side-copy--right">好滴に味おい</p>
+      <section class="tariffs" id="tariffs">
+        <h2>Тарифы</h2>
+        <div class="tariff-grid">
+          <article class="card">
+            <h3>Домашний</h3>
+            <p>1 целая курица + фирменный соус.</p>
+            <strong>1 490 ₽</strong>
+          </article>
+          <article class="card">
+            <h3>Семейный</h3>
+            <p>2 курицы + 2 гарнира + соусы.</p>
+            <strong>2 790 ₽</strong>
+          </article>
+          <article class="card">
+            <h3>Праздничный</h3>
+            <p>4 курицы + закуски + сервировка.</p>
+            <strong>5 490 ₽</strong>
+          </article>
+        </div>
       </section>
 
-      <footer class="poster-footer">
-        <div class="rainbow"></div>
-        <div class="poster-text">
-          <strong>GAME BOY CLUB</strong>
-          <span>Portable Fun</span>
+      <section class="portfolio" id="portfolio">
+        <div class="portfolio__head">
+          <h2>Портфолио блюд</h2>
+          <div class="carousel-controls">
+            <button id="portfolio-prev" class="btn btn--small" type="button">←</button>
+            <button id="portfolio-next" class="btn btn--small" type="button">→</button>
+          </div>
         </div>
-      </footer>
 
-      <a class="admin-link" href="/admin.html">Открыть админку</a>
+        <div id="portfolio-carousel" class="carousel" aria-label="Карусель блюд"></div>
+
+        <a class="link" href="/portfolio.html">Смотреть подробные описания →</a>
+      </section>
+
+      <section class="order" id="order">
+        <h2>Оставить заявку</h2>
+        <form id="order-form" class="order-form">
+          <input id="lead-name" type="text" placeholder="Ваше имя" required />
+          <input id="lead-phone" type="tel" placeholder="Телефон" required />
+          <textarea id="lead-comment" placeholder="Что приготовить и к какому времени"></textarea>
+          <button class="btn btn--accent" type="submit">Заказать</button>
+        </form>
+        <p id="order-status" class="status"></p>
+      </section>
+
+      <footer class="footer">
+        <a class="link" href="/admin.html">Админка</a>
+        <p>Почта для заявок: lisica.i.v@gmail.com</p>
+      </footer>
     </main>
 
     <script src="/script.js"></script>
