@@ -44,7 +44,7 @@ body {
 
 .poster-content {
   display: grid;
-  grid-template-columns: minmax(32px, 1fr) minmax(320px, 520px) minmax(32px, 1fr);
+  grid-template-columns: minmax(32px, 1fr) minmax(340px, 620px) minmax(32px, 1fr);
   gap: 20px;
   align-items: center;
 }
@@ -61,7 +61,7 @@ body {
 .gameboy-photo {
   position: relative;
   width: 100%;
-  max-width: 520px;
+  max-width: 620px;
   margin-inline: auto;
 }
 
@@ -73,10 +73,10 @@ body {
 
 .gameboy-photo__screen {
   position: absolute;
-  left: 31.8%;
-  top: 18.1%;
-  width: 47.6%;
-  aspect-ratio: 10 / 9;
+  left: 37.08%;
+  top: 30.38%;
+  width: 30%;
+  aspect-ratio: 72 / 61;
   border-radius: 12px;
   border: 2px solid #1f2512;
   background:
