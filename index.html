@@ -3,48 +3,76 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PR BAND — 2026</title>
+    <title>Курица на заказ — лендинг</title>
     <link rel="stylesheet" href="/styles.css" />
   </head>
-  <body>
-    <main class="poster" id="poster">
-      <header class="top-copy">
-        <h1>PR BAND</h1>
-        <p class="line-a">ПОМОЖЕМ АРТИСТУ ПРОЯВИТЬСЯ В ПОЛНОЙ МЕРЕ</p>
-        <p class="line-b">БРЕНД-МЕНЕДЖМЕНТ<br />SMM И МАРКЕТИНГ<br />МЕНЕДЖМЕНТ АРТИСТА</p>
+  <body class="site site--landing">
+    <main class="landing">
+      <header class="hero">
+        <aside class="hero__left">ГОРЯЧО<br />ВКУСНО<br />БЫСТРО</aside>
+
+        <section class="hero__center">
+          <p class="badge">доставка 26 минут*</p>
+          <h1>ПРИГОТОВИМ КУРИЦУ ЗА ВАС</h1>
+          <p class="sub">Сочная курица на заказ для дома, офиса и мероприятий.</p>
+          <a class="btn btn--accent" href="#order">Заказать</a>
+        </section>
+
+        <figure class="hero__image-wrap">
+          <img src="/assets/hero-happy-man-chicken.svg" alt="Счастливый мужчина держит курицу" />
+        </figure>
       </header>
 
-      <section class="arena" aria-label="Игровая сцена продвижения">
-        <div class="skyline">
-          <div class="tower" aria-label="Останкинская башня"></div>
+      <section class="tariffs" id="tariffs">
+        <h2>Тарифы</h2>
+        <div class="tariff-grid">
+          <article class="card">
+            <h3>Домашний</h3>
+            <p>1 целая курица + фирменный соус.</p>
+            <strong>1 490 ₽</strong>
+          </article>
+          <article class="card">
+            <h3>Семейный</h3>
+            <p>2 курицы + 2 гарнира + соусы.</p>
+            <strong>2 790 ₽</strong>
+          </article>
+          <article class="card">
+            <h3>Праздничный</h3>
+            <p>4 курицы + закуски + сервировка.</p>
+            <strong>5 490 ₽</strong>
+          </article>
         </div>
-
-        <div class="pacman" id="pacman" aria-label="Пакмен"></div>
-        <div class="ghost ghost--c" id="ghost-c"></div>
-        <div class="ghost ghost--o" id="ghost-o"></div>
-        <div class="ghost ghost--r" id="ghost-r"></div>
-
-        <div class="kong" id="kong" aria-label="Кинг-Конг">
-          <div class="kong__face"></div>
-        </div>
-
-        <div class="barrel barrel--1"></div>
-        <div class="barrel barrel--2"></div>
-        <div class="barrel barrel--3"></div>
       </section>
 
-      <div class="cta-bubble">ЗАПУСТИТЬ ПРОДВИЖЕНИЕ</div>
+      <section class="portfolio" id="portfolio">
+        <div class="portfolio__head">
+          <h2>Портфолио блюд</h2>
+          <div class="carousel-controls">
+            <button id="portfolio-prev" class="btn btn--small" type="button">←</button>
+            <button id="portfolio-next" class="btn btn--small" type="button">→</button>
+          </div>
+        </div>
 
-      <section class="controls">
-        <button id="auto-btn" class="ctrl">АВТО-КНОПКА</button>
-        <button id="arcade-btn" class="ctrl">КНОПКА START</button>
-        <button id="lever" class="lever" aria-label="Рычажок запуска">
-          <span class="lever__stick"></span>
-          <span class="lever__base"></span>
-        </button>
+        <div id="portfolio-carousel" class="carousel" aria-label="Карусель блюд"></div>
+
+        <a class="link" href="/portfolio.html">Смотреть подробные описания →</a>
       </section>
 
-      <footer class="year">2026</footer>
+      <section class="order" id="order">
+        <h2>Оставить заявку</h2>
+        <form id="order-form" class="order-form">
+          <input id="lead-name" type="text" placeholder="Ваше имя" required />
+          <input id="lead-phone" type="tel" placeholder="Телефон" required />
+          <textarea id="lead-comment" placeholder="Что приготовить и к какому времени"></textarea>
+          <button class="btn btn--accent" type="submit">Заказать</button>
+        </form>
+        <p id="order-status" class="status"></p>
+      </section>
+
+      <footer class="footer">
+        <a class="link" href="/admin.html">Админка</a>
+        <p>Почта для заявок: lisica.i.v@gmail.com</p>
+      </footer>
     </main>
 
     <script src="/script.js"></script>
