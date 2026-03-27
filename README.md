@@ -40,6 +40,11 @@ MVP-проект на **Next.js + TypeScript + Tailwind CSS** для прода�
 - `chat_activity` — активность чата
 - `ad_format` — формат рекламы
 
+## Требования к окружению
+
+- Node.js `>= 18.18.0` (рекомендуется Node `20`, см. `.nvmrc`)
+- npm `>= 9`
+
 ## Запуск
 
 ```bash
@@ -67,6 +72,14 @@ npm run build
 В репозитории добавлен `vercel.json` с `framework: "nextjs"` и `outputDirectory: ".next"`, чтобы Vercel не ожидал папку `public` как output-directory.
 
 Если в настройках проекта Vercel ранее был вручную указан `Output Directory = public`, поменяйте на `.next` или верните `Auto`.
+
+
+## Если "не запускается"
+
+1. Проверьте версию Node.js: `node -v` (должна быть не ниже `18.18.0`).
+2. Переустановите зависимости: `rm -rf node_modules package-lock.json && npm install`.
+3. Выполните проверки: `npm run typecheck && npm run build`.
+4. Для локального старта: `npm run dev`, для прод-режима: `npm run build && npm run start`.
 
 ## Структура проекта
 
