@@ -57,6 +57,11 @@ npm run build
 ```
 
 
+
+## Безопасность
+
+- Next.js обновлен до `15.5.14` для закрытия уязвимостей, включая CVE-2025-66478, из-за которых Vercel может блокировать деплой.
+
 ## Деплой на Vercel
 
 В репозитории добавлен `vercel.json` с `framework: "nextjs"` и `outputDirectory: ".next"`, чтобы Vercel не ожидал папку `public` как output-directory.
