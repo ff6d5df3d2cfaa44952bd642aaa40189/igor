@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import { SeoListPage } from '@/components/SeoListPage';
 import { getBySlug, getCatalog } from '@/lib/catalog';
 
@@ -19,6 +20,7 @@ export async function generateMetadata({ params }: { params: Promise<{ citySlug:
 export default async function CityPage({ params }: { params: Promise<{ citySlug: string }> }) {
   const { citySlug } = await params;
   const items = getBySlug('city', citySlug);
+  if (!items.length) notFound();
   const name = items[0]?.cityCluster ?? citySlug;
 
   return <SeoListPage title={`Город / кластер: ${name}`} description="Индексируемая страница города или кластера." items={items} />;

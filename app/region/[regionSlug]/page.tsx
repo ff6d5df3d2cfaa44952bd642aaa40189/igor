@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import { SeoListPage } from '@/components/SeoListPage';
 import { getBySlug, getCatalog } from '@/lib/catalog';
 
@@ -20,6 +21,7 @@ export async function generateMetadata({ params }: { params: Promise<{ regionSlu
 export default async function RegionPage({ params }: { params: Promise<{ regionSlug: string }> }) {
   const { regionSlug } = await params;
   const items = getBySlug('region', regionSlug);
+  if (!items.length) notFound();
   const regionName = items[0]?.region ?? regionSlug;
 
   return <SeoListPage title={`Регион: ${regionName}`} description="Индексируемая региональная страница каталога." items={items} />;

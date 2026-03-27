@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import { SeoListPage } from '@/components/SeoListPage';
 import { getByMoscowAreaSlug, getCatalog, slugify } from '@/lib/catalog';
 
@@ -17,6 +18,7 @@ export async function generateMetadata({ params }: { params: Promise<{ aoSlug: s
 export default async function MoscowAoPage({ params }: { params: Promise<{ aoSlug: string }> }) {
   const { aoSlug } = await params;
   const items = getByMoscowAreaSlug(aoSlug);
+  if (!items.length) notFound();
 
   return <SeoListPage title={`АО Москвы: ${aoSlug.toUpperCase()}`} description="Индексируемая страница административного округа Москвы." items={items} />;
 }
