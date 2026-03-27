@@ -3,8 +3,9 @@ import { CatalogGrid } from '@/components/CatalogGrid';
 import { filterCatalog, getCatalog, getFilterOptions, slugify } from '@/lib/catalog';
 
 export const metadata = {
-  title: 'Каталог ЖК и Telegram-чатов',
-  description: 'Полный каталог ЖК с фильтрами по региону, городу, АО, району и застройщику.',
+  title: 'Купить рекламу в Telegram-чатах ЖК — полный каталог',
+  description:
+    'Каталог Telegram-чатов жилых комплексов для размещения рекламы. Фильтры по региону, городу, району, АО Москвы и застройщику.',
 };
 
 type SearchParams = {
@@ -30,8 +31,14 @@ export default async function CatalogPage({ searchParams }: { searchParams: Prom
   const valuesToOptions = (values: string[]) => values.map((value) => ({ label: value, value: slugify(value) }));
 
   return (
-    <main className="container-page space-y-4">
-      <h1 className="text-2xl font-bold">Каталог всех ЖК</h1>
+    <main className="container-page space-y-5">
+      <section className="glass-card p-6 md:p-8">
+        <h1 className="section-title">Каталог площадок: реклама в Telegram-чатах ЖК</h1>
+        <p className="section-subtitle">
+          Выберите регион, район и застройщика, чтобы быстро найти нужные чаты жилых комплексов и оставить заявку на размещение рекламы.
+        </p>
+      </section>
+
       <CatalogFilters
         options={{
           regions: valuesToOptions(options.regions),

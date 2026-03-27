@@ -26,22 +26,24 @@ export function CatalogFilters({ options }: { options: OptionGroups }) {
 
   const renderSelect = (label: string, param: string, values: Option[]) => (
     <label className="flex flex-col gap-1 text-sm">
-      <span className="font-medium">{label}</span>
+      <span className="font-medium text-slate-700">{label}</span>
       <select
-        className="rounded border bg-white px-3 py-2"
+        className="rounded-xl border border-slate-200 bg-white px-3 py-2 text-slate-900 shadow-sm outline-none transition focus:border-blue-300 focus:ring-2 focus:ring-blue-100"
         value={params.get(param) ?? ''}
         onChange={(event) => setParam(param, event.target.value)}
       >
         <option value="">Все</option>
         {values.map((value) => (
-          <option key={value.value} value={value.value}>{value.label}</option>
+          <option key={value.value} value={value.value}>
+            {value.label}
+          </option>
         ))}
       </select>
     </label>
   );
 
   return (
-    <section className="grid gap-3 rounded-lg border bg-white p-4 md:grid-cols-3 lg:grid-cols-5">
+    <section className="glass-card grid gap-3 p-4 md:grid-cols-3 lg:grid-cols-5">
       {renderSelect('Регион', 'region', options.regions)}
       {renderSelect('Город / кластер', 'city', options.cityClusters)}
       {renderSelect('АО Москвы', 'ao', options.moscowAreas)}
