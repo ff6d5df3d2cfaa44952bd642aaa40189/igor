@@ -6,9 +6,7 @@ import { forwardLeadToIntegrations } from '@/lib/integrations';
 
 const leadSchema = z.object({
   name: z.string().min(1),
-  phone: z.string().min(1),
   telegram: z.string().optional().default(''),
-  company: z.string().optional().default(''),
   businessType: z.string().optional().default(''),
   comment: z.string().optional().default(''),
   chat_name: z.string().min(1),

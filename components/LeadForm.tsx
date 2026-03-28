@@ -9,9 +9,7 @@ type Props = {
 
 const initial = {
   name: '',
-  phone: '',
   telegram: '',
-  company: '',
   businessType: '',
   comment: '',
 };
@@ -55,9 +53,7 @@ export function LeadForm({ hidden }: Props) {
       <h3 className="text-lg font-semibold">Оставить заявку на рекламу</h3>
       <div className="grid gap-3 md:grid-cols-2">
         <input required className="rounded-xl border border-slate-200 p-2" placeholder="Имя" value={form.name} onChange={(e) => onChange('name', e.target.value)} />
-        <input required className="rounded-xl border border-slate-200 p-2" placeholder="Телефон" value={form.phone} onChange={(e) => onChange('phone', e.target.value)} />
         <input className="rounded-xl border border-slate-200 p-2" placeholder="Telegram" value={form.telegram} onChange={(e) => onChange('telegram', e.target.value)} />
-        <input className="rounded-xl border border-slate-200 p-2" placeholder="Компания" value={form.company} onChange={(e) => onChange('company', e.target.value)} />
         <select
           required
           className="rounded-xl border border-slate-200 bg-white p-2 md:col-span-2"

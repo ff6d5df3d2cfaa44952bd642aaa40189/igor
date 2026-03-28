@@ -59,9 +59,7 @@ export type CatalogFilters = {
 
 export type LeadPayload = {
   name: string;
-  phone: string;
   telegram: string;
-  company: string;
   businessType: string;
   comment: string;
   chat_name: string;
