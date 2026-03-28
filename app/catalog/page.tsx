@@ -20,6 +20,8 @@ export default async function CatalogPage({ searchParams }: { searchParams: Prom
   const params = await searchParams;
   const options = getFilterOptions();
 
+  const allItems = getCatalog();
+
   const filtered = filterCatalog({
     region: params.region,
     cityCluster: params.city,
@@ -39,6 +41,7 @@ export default async function CatalogPage({ searchParams }: { searchParams: Prom
       </section>
 
       <CatalogFilters
+        items={allItems}
         options={{
           regions: options.regions,
           cityClusters: options.cityClusters,
@@ -47,7 +50,7 @@ export default async function CatalogPage({ searchParams }: { searchParams: Prom
           developers: options.developers,
         }}
       />
-      <p className="text-sm text-slate-600">Всего в выдаче: {filtered.length} из {getCatalog().length}</p>
+      <p className="text-sm text-slate-600">Всего в выдаче: {filtered.length} из {allItems.length}</p>
       <CatalogGrid items={filtered} searchable />
     </main>
   );
