@@ -33,11 +33,11 @@ export default function HomePage() {
               аудитории.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
-              <Link className="btn-primary" href="/catalog">
-                Подобрать площадки
-              </Link>
+              <a className="btn-primary" href="https://t.me/SofiyaVolk010" target="_blank" rel="noreferrer">
+                Написать в Telegram
+              </a>
               <Link className="btn-outline" href="/catalog">
-                Посмотреть весь каталог
+                Показать каталог
               </Link>
             </div>
           </div>
