@@ -1,5 +1,8 @@
 import Link from 'next/link';
 import { CatalogItem } from '@/lib/types';
+import { slugify } from '@/lib/catalog';
+
+const filterHref = (key: string, value: string) => `/catalog?${key}=${encodeURIComponent(value)}`;
 
 export function CatalogCard({ item }: { item: CatalogItem }) {
   return (
@@ -11,22 +14,37 @@ export function CatalogCard({ item }: { item: CatalogItem }) {
 
       <div className="space-y-3 p-5 text-sm">
         <p className="text-slate-600">
-          Застройщик: <span className="font-medium text-slate-900">{item.developer}</span>
+          Застройщик:{' '}
+          <Link className="font-medium text-blue-700 hover:underline" href={filterHref('developer', slugify(item.developer))}>
+            {item.developer}
+          </Link>
         </p>
         <div className="grid gap-1.5 text-slate-700">
           <p>
-            <span className="text-slate-500">Регион:</span> {item.region}
+            <span className="text-slate-500">Регион:</span>{' '}
+            <Link className="text-blue-700 hover:underline" href={filterHref('region', item.slugRegion)}>
+              {item.region}
+            </Link>
           </p>
           <p>
-            <span className="text-slate-500">Город / кластер:</span> {item.cityCluster}
+            <span className="text-slate-500">Город / кластер:</span>{' '}
+            <Link className="text-blue-700 hover:underline" href={filterHref('city', item.slugCityCluster)}>
+              {item.cityCluster}
+            </Link>
           </p>
           {item.moscowArea ? (
             <p>
-              <span className="text-slate-500">АО Москвы:</span> {item.moscowArea}
+              <span className="text-slate-500">АО Москвы:</span>{' '}
+              <Link className="text-blue-700 hover:underline" href={filterHref('ao', slugify(item.moscowArea))}>
+                {item.moscowArea}
+              </Link>
             </p>
           ) : null}
           <p>
-            <span className="text-slate-500">Район / локация:</span> {item.district}
+            <span className="text-slate-500">Район / локация:</span>{' '}
+            <Link className="text-blue-700 hover:underline" href={filterHref('district', item.slugDistrict)}>
+              {item.district}
+            </Link>
           </p>
         </div>
 
