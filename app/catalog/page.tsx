@@ -1,6 +1,6 @@
 import { CatalogFilters } from '@/components/CatalogFilters';
 import { CatalogGrid } from '@/components/CatalogGrid';
-import { filterCatalog, getCatalog, getFilterOptions } from '@/lib/catalog';
+import { getCatalog, getFilterOptions, filterCatalog } from '@/lib/catalog';
 
 export const metadata = {
   title: 'Купить рекламу в Telegram-чатах ЖК — полный каталог',
@@ -9,6 +9,7 @@ export const metadata = {
 };
 
 type SearchParams = {
+  q?: string;
   region?: string;
   city?: string;
   ao?: string;
@@ -19,24 +20,26 @@ type SearchParams = {
 export default async function CatalogPage({ searchParams }: { searchParams: Promise<SearchParams> }) {
   const params = await searchParams;
   const options = getFilterOptions();
-
   const allItems = getCatalog();
 
-  const filtered = filterCatalog({
-    region: params.region,
-    cityCluster: params.city,
-    moscowArea: params.ao,
-    district: params.district,
-    developer: params.developer,
-  });
+  const normalizedQuery = (params.q ?? '').trim().toLowerCase();
 
+  const filtered = normalizedQuery
+    ? allItems.filter((item) => item.chatName.toLowerCase().includes(normalizedQuery))
+    : filterCatalog({
+        region: params.region,
+        cityCluster: params.city,
+        moscowArea: params.ao,
+        district: params.district,
+        developer: params.developer,
+      });
 
   return (
     <main className="container-page space-y-5">
       <section className="glass-card p-6 md:p-8">
         <h1 className="section-title">Каталог площадок: реклама в Telegram-чатах ЖК</h1>
         <p className="section-subtitle">
-          Выберите регион, район и застройщика, чтобы быстро найти нужные чаты жилых комплексов и оставить заявку на размещение рекламы.
+          Выберите фильтры для точного подбора или используйте поиск по названию чата/ЖК. Поиск работает отдельно и отключает фильтры.
         </p>
       </section>
 
@@ -51,7 +54,7 @@ export default async function CatalogPage({ searchParams }: { searchParams: Prom
         }}
       />
       <p className="text-sm text-slate-600">Всего в выдаче: {filtered.length} из {allItems.length}</p>
-      <CatalogGrid items={filtered} searchable />
+      <CatalogGrid items={filtered} />
     </main>
   );
 }

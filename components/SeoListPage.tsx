@@ -8,7 +8,7 @@ export function SeoListPage({ title, description, items }: { title: string; desc
         <h1 className="text-2xl font-bold">{title}</h1>
         <p className="text-slate-700">{description}</p>
       </header>
-      <CatalogGrid items={items} searchable />
+      <CatalogGrid items={items} />
     </main>
   );
 }
