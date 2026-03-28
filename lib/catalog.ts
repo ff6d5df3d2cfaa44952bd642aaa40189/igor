@@ -75,7 +75,9 @@ export function getByMoscowAreaSlug(slug: string): CatalogItem[] {
   return normalizedData.filter((item) => slugify(item.moscowArea) === slug);
 }
 
-export function slugify(value: string): string {
+export function slugify(value: string | null | undefined): string {
+  if (!value || typeof value !== 'string') return '';
+
   return value
     .toLowerCase()
     .trim()
