@@ -29,7 +29,9 @@ export function LeadForm({ hidden }: Props) {
       ...hidden,
     };
 
-    const response = await fetch('/api/leads', {
+    const endpoint = process.env.NEXT_PUBLIC_LEAD_ENDPOINT ?? '/api/leads.php';
+
+    const response = await fetch(endpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),

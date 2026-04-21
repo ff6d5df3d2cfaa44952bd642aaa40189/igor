@@ -12,13 +12,12 @@ MVP-проект на **Next.js + TypeScript + Tailwind CSS** для прода�
   - район / локация
   - застройщик
 - SEO-страницы:
-  - `/region/[regionSlug]`
-  - `/city/[citySlug]`
-  - `/moscow-ao/[aoSlug]`
-  - `/district/[districtSlug]`
-- Карточка отдельного ЖК: `/chat/[chatSlug]`
-- Форма заявки с сохранением в локальный JSON (`data/leads.json`) через API `/api/leads`.
-- Точка интеграции для будущей отправки заявок в Telegram webhook и/или email (`lib/integrations.ts`).
+  - `/region/[regionSlug]/`
+  - `/city/[citySlug]/`
+  - `/moscow-ao/[aoSlug]/`
+  - `/district/[districtSlug]/`
+- Карточка отдельного ЖК: `/chat/[chatSlug]/`
+- Форма заявки с сохранением в `data/leads.json` через PHP endpoint: `/api/leads.php`.
 - SEO:
   - человекопонятные slug
   - meta title / description
@@ -31,21 +30,12 @@ MVP-проект на **Next.js + TypeScript + Tailwind CSS** для прода�
 
 Структура исходного файла **не меняется**. Нормализация выполняется на уровне приложения (`lib/catalog.ts`).
 
-## Будущее расширение
-
-В типы заложены будущие поля:
-
-- `price_placement` — цена размещения
-- `reach` — охват
-- `chat_activity` — активность чата
-- `ad_format` — формат рекламы
-
 ## Требования к окружению
 
-- Node.js `>= 18.18.0` (рекомендуется Node `20`, см. `.nvmrc`)
+- Node.js `>= 18.18.0` (рекомендуется Node `20`)
 - npm `>= 9`
 
-## Запуск
+## Локальный запуск
 
 ```bash
 npm install
@@ -54,6 +44,57 @@ npm run dev
 
 Открыть: `http://localhost:3000`.
 
+## Статическая сборка для shared hosting (REG.RU + ISPmanager)
+
+Проект подготовлен под сценарий из панели файлового менеджера (как на скриншоте):
+
+- сайт собирается в **статические HTML/CSS/JS**,
+- форма заявок работает через `PHP` файл `/api/leads.php`,
+- заявки складываются в `/data/leads.json`.
+
+### 1) Собрать сайт локально
+
+```bash
+npm install
+npm run build
+```
+
+После сборки будет папка `out/`.
+
+### 2) Залить на REG.RU
+
+В ISPmanager откройте корень домена, например:
+
+`/www/ваш-домен/`
+
+И загрузите **содержимое** папки `out/` (не саму папку, а файлы внутри):
+
+- `index.html`
+- `catalog/`, `chat/`, `region/`, ...
+- `api/leads.php`
+- `data/leads.json`
+- остальные статические файлы
+
+### 3) Права на запись для формы
+
+Проверьте, что PHP может писать в `data/leads.json`:
+
+- `data/` — минимум `755` (при необходимости `775`)
+- `data/leads.json` — минимум `664`
+
+Если заявка не отправляется — обычно причина именно в правах.
+
+### 4) Проверка формы
+
+Откройте карточку любого ЖК и отправьте тестовую заявку.
+
+Проверьте, что запись появилась в `/data/leads.json`.
+
+## Важно
+
+- Этот вариант подходит для **обычного shared-хостинга** REG.RU, где нет постоянного Node.js процесса.
+- Поэтому используется `next.config.ts` в режиме `output: 'export'` + PHP endpoint для формы.
+
 ## Проверка и сборка
 
 ```bash
@@ -61,30 +102,11 @@ npm run typecheck
 npm run build
 ```
 
-
-
-## Безопасность
-
-- Next.js обновлен до `15.5.14` для закрытия уязвимостей, включая CVE-2025-66478, из-за которых Vercel может блокировать деплой.
-
-## Деплой на Vercel
-
-В репозитории добавлен `vercel.json` с `framework: "nextjs"` и `outputDirectory: ".next"`, чтобы Vercel не ожидал папку `public` как output-directory.
-
-Если в настройках проекта Vercel ранее был вручную указан `Output Directory = public`, поменяйте на `.next` или верните `Auto`.
-
-
-## Если "не запускается"
-
-1. Проверьте версию Node.js: `node -v` (должна быть не ниже `18.18.0`).
-2. Переустановите зависимости: `rm -rf node_modules package-lock.json && npm install`.
-3. Выполните проверки: `npm run typecheck && npm run build`.
-4. Для локального старта: `npm run dev`, для прод-режима: `npm run build && npm run start`.
-
 ## Структура проекта
 
-- `app/` — страницы и API
+- `app/` — страницы
 - `components/` — UI-компоненты
-- `lib/` — типы, данные, интеграции
-- `data/leads.json` — локальное хранилище заявок (MVP)
+- `lib/` — типы и каталог
+- `public/api/leads.php` — backend для формы на shared hosting
+- `public/data/leads.json` — хранилище заявок в production на shared hosting
 - `catalog_chats_site_ready.json` — исходный каталог
