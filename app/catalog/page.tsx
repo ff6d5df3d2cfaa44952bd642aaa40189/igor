@@ -1,6 +1,5 @@
-import { CatalogFilters } from '@/components/CatalogFilters';
-import { CatalogGrid } from '@/components/CatalogGrid';
-import { filterCatalog, getCatalog, getFilterOptions, slugify } from '@/lib/catalog';
+import { Suspense } from 'react';
+import { CatalogPageClient } from '@/components/CatalogPageClient';
 
 export const metadata = {
   title: 'Купить рекламу в Telegram-чатах ЖК — полный каталог',
@@ -8,28 +7,7 @@ export const metadata = {
     'Каталог Telegram-чатов жилых комплексов для размещения рекламы. Фильтры по региону, городу, району, АО Москвы и застройщику.',
 };
 
-type SearchParams = {
-  region?: string;
-  city?: string;
-  ao?: string;
-  district?: string;
-  developer?: string;
-};
-
-export default async function CatalogPage({ searchParams }: { searchParams: Promise<SearchParams> }) {
-  const params = await searchParams;
-  const options = getFilterOptions();
-
-  const filtered = filterCatalog({
-    region: params.region,
-    cityCluster: params.city,
-    moscowArea: params.ao,
-    district: params.district,
-    developer: params.developer,
-  });
-
-  const valuesToOptions = (values: string[]) => values.map((value) => ({ label: value, value: slugify(value) }));
-
+export default function CatalogPage() {
   return (
     <main className="container-page space-y-5">
       <section className="glass-card p-6 md:p-8">
@@ -39,17 +17,9 @@ export default async function CatalogPage({ searchParams }: { searchParams: Prom
         </p>
       </section>
 
-      <CatalogFilters
-        options={{
-          regions: valuesToOptions(options.regions),
-          cityClusters: valuesToOptions(options.cityClusters),
-          moscowAreas: valuesToOptions(options.moscowAreas),
-          districts: valuesToOptions(options.districts),
-          developers: valuesToOptions(options.developers),
-        }}
-      />
-      <p className="text-sm text-slate-600">Всего в выдаче: {filtered.length} из {getCatalog().length}</p>
-      <CatalogGrid items={filtered} />
+      <Suspense fallback={<p className="text-sm text-slate-600">Загружаем каталог...</p>}>
+        <CatalogPageClient />
+      </Suspense>
     </main>
   );
 }
