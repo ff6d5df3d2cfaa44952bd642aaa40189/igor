@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Каталог чатов жилых комплексов</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <div class="hero__content container">
+        <h1>Каталог чатов жилых комплексов</h1>
+        <p>
+          Быстрый поиск соседских чатов по району, классу жилья и стадии сдачи.
+          Выберите ЖК и присоединяйтесь к обсуждениям.
+        </p>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="controls" aria-label="Фильтры каталога">
+        <label class="controls__item">
+          <span>Поиск по названию</span>
+          <input id="searchInput" type="search" placeholder="Например, Солнечный берег" />
+        </label>
+
+        <label class="controls__item">
+          <span>Район</span>
+          <select id="districtFilter">
+            <option value="">Все районы</option>
+          </select>
+        </label>
+
+        <label class="controls__item">
+          <span>Класс</span>
+          <select id="classFilter">
+            <option value="">Любой класс</option>
+          </select>
+        </label>
+
+        <label class="controls__item">
+          <span>Стадия</span>
+          <select id="statusFilter">
+            <option value="">Любая стадия</option>
+          </select>
+        </label>
+      </section>
+
+      <section>
+        <div class="results-meta" id="resultsMeta">Загрузка данных…</div>
+        <div id="catalog" class="catalog" aria-live="polite"></div>
+      </section>
+    </main>
+
+    <template id="cardTemplate">
+      <article class="card">
+        <div class="card__top">
+          <h2></h2>
+          <span class="badge"></span>
+        </div>
+        <ul class="card__facts"></ul>
+        <a class="card__chat-link" target="_blank" rel="noopener noreferrer">Открыть чат</a>
+      </article>
+    </template>
+
+    <script src="script.js"></script>
+  </body>
+</html>
