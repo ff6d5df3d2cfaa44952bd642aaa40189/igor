@@ -15,41 +15,22 @@
         --border: #e2e8f0;
         --shadow: 0 6px 20px rgba(15, 23, 42, 0.08);
       }
-
-      * {
-        box-sizing: border-box;
-      }
-
+      * { box-sizing: border-box; }
       body {
         margin: 0;
         font-family: Inter, system-ui, -apple-system, sans-serif;
         color: var(--text);
         background: var(--bg);
       }
-
-      .container {
-        width: min(1100px, 92vw);
-        margin: 0 auto;
-      }
-
+      .container { width: min(1100px, 92vw); margin: 0 auto; }
       .hero {
         background: linear-gradient(135deg, #2b6cb0, #1a365d);
         color: #fff;
         padding: 56px 0 42px;
         box-shadow: var(--shadow);
       }
-
-      .hero h1 {
-        margin: 0;
-        font-size: clamp(1.8rem, 3.2vw, 2.6rem);
-      }
-
-      .hero p {
-        margin-top: 12px;
-        max-width: 720px;
-        color: rgba(255, 255, 255, 0.9);
-      }
-
+      .hero h1 { margin: 0; font-size: clamp(1.8rem, 3.2vw, 2.6rem); }
+      .hero p { margin-top: 12px; max-width: 780px; color: rgba(255,255,255,.9); }
       .controls {
         margin-top: -18px;
         background: var(--surface);
@@ -58,102 +39,23 @@
         padding: 16px;
         display: grid;
         gap: 12px;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         box-shadow: var(--shadow);
       }
-
-      .controls__item {
-        display: flex;
-        flex-direction: column;
-        gap: 6px;
-        color: var(--muted);
-        font-size: 0.92rem;
+      .controls__item { display: flex; flex-direction: column; gap: 6px; color: var(--muted); font-size: .92rem; }
+      input, select {
+        border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px;
+        font: inherit; color: var(--text); background: #fff;
       }
-
-      input,
-      select {
-        border: 1px solid var(--border);
-        border-radius: 10px;
-        padding: 10px 12px;
-        font: inherit;
-        color: var(--text);
-        background: #fff;
-      }
-
-      .results-meta {
-        margin: 18px 0 12px;
-        color: var(--muted);
-        font-size: 0.95rem;
-      }
-
-      .catalog {
-        display: grid;
-        gap: 14px;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        padding-bottom: 36px;
-      }
-
-      .card {
-        background: var(--surface);
-        border: 1px solid var(--border);
-        border-radius: 14px;
-        padding: 14px;
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-      }
-
-      .card__top {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        gap: 8px;
-      }
-
-      .card h2 {
-        margin: 0;
-        font-size: 1.05rem;
-      }
-
-      .badge {
-        border-radius: 999px;
-        padding: 4px 10px;
-        font-size: 0.78rem;
-        color: var(--primary);
-        background: var(--primary-soft);
-        white-space: nowrap;
-      }
-
-      .card__facts {
-        margin: 0;
-        padding: 0;
-        list-style: none;
-        display: grid;
-        gap: 6px;
-        color: var(--muted);
-        font-size: 0.92rem;
-      }
-
-      .card__chat-link {
-        margin-top: auto;
-        text-align: center;
-        text-decoration: none;
-        color: #fff;
-        background: var(--primary);
-        border-radius: 10px;
-        padding: 9px;
-        font-weight: 500;
-      }
-
-      .empty {
-        padding: 20px;
-        text-align: center;
-        border: 1px dashed var(--border);
-        border-radius: 12px;
-        color: var(--muted);
-        background: #fff;
-        grid-column: 1 / -1;
-      }
+      .results-meta { margin: 18px 0 12px; color: var(--muted); font-size: .95rem; }
+      .catalog { display:grid; gap:14px; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); padding-bottom:36px; }
+      .card { background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:14px; display:flex; flex-direction:column; gap:12px; }
+      .card__top { display:flex; justify-content:space-between; align-items:flex-start; gap:8px; }
+      .card h2 { margin:0; font-size:1.05rem; }
+      .badge { border-radius:999px; padding:4px 10px; font-size:.78rem; color:var(--primary); background:var(--primary-soft); white-space:nowrap; }
+      .card__facts { margin:0; padding:0; list-style:none; display:grid; gap:6px; color:var(--muted); font-size:.92rem; }
+      .card__chat-link { margin-top:auto; text-align:center; text-decoration:none; color:#fff; background:var(--primary); border-radius:10px; padding:9px; font-weight:500; }
+      .empty { padding:20px; text-align:center; border:1px dashed var(--border); border-radius:12px; color:var(--muted); background:#fff; grid-column:1 / -1; }
     </style>
   </head>
   <body>
@@ -161,8 +63,8 @@
       <div class="hero__content container">
         <h1>Каталог чатов жилых комплексов</h1>
         <p>
-          Быстрый поиск соседских чатов по району, классу жилья и стадии сдачи.
-          Выберите ЖК и присоединяйтесь к обсуждениям.
+          Версия для shared‑хостинга REG.RU: данные берутся из файла
+          <code>catalog_chats_site_ready.json</code> в той же папке сайта.
         </p>
       </div>
     </header>
@@ -170,34 +72,29 @@
     <main class="container">
       <section class="controls" aria-label="Фильтры каталога">
         <label class="controls__item">
-          <span>Поиск по названию</span>
-          <input id="searchInput" type="search" placeholder="Например, Солнечный берег" />
+          <span>Поиск по ЖК</span>
+          <input id="searchInput" type="search" placeholder="Например, Яуза Парк" />
         </label>
-
+        <label class="controls__item">
+          <span>АО Москвы</span>
+          <select id="areaFilter"><option value="">Все АО</option></select>
+        </label>
         <label class="controls__item">
           <span>Район</span>
-          <select id="districtFilter">
-            <option value="">Все районы</option>
-          </select>
+          <select id="districtFilter"><option value="">Все районы</option></select>
         </label>
-
         <label class="controls__item">
-          <span>Класс</span>
-          <select id="classFilter">
-            <option value="">Любой класс</option>
-          </select>
+          <span>Застройщик</span>
+          <select id="developerFilter"><option value="">Любой</option></select>
         </label>
-
         <label class="controls__item">
-          <span>Стадия</span>
-          <select id="statusFilter">
-            <option value="">Любая стадия</option>
-          </select>
+          <span>Статус</span>
+          <select id="statusFilter"><option value="">Любой</option></select>
         </label>
       </section>
 
       <section>
-        <div class="results-meta" id="resultsMeta">Найдено: 0</div>
+        <div class="results-meta" id="resultsMeta">Загрузка данных…</div>
         <div id="catalog" class="catalog" aria-live="polite"></div>
       </section>
     </main>
@@ -214,137 +111,130 @@
     </template>
 
     <script>
-      const complexes = [
+      const DATA_FILE = 'catalog_chats_site_ready.json';
+      const fallbackComplexes = [
         {
-          name: 'ЖК Солнечный Берег',
-          district: 'Приморский',
-          classType: 'Комфорт',
-          status: 'Сдан',
-          apartments: '1 420 квартир',
-          chatUrl: 'https://t.me/example_sunny_coast'
-        },
-        {
-          name: 'ЖК Северный Парк',
-          district: 'Северный',
-          classType: 'Бизнес',
-          status: 'Строится',
-          apartments: '980 квартир',
-          chatUrl: 'https://t.me/example_north_park'
-        },
-        {
-          name: 'ЖК Лесная Резиденция',
-          district: 'Западный',
-          classType: 'Премиум',
-          status: 'Сдан',
-          apartments: '640 квартир',
-          chatUrl: 'https://t.me/example_forest_residence'
-        },
-        {
-          name: 'ЖК Речной Квартал',
-          district: 'Центральный',
-          classType: 'Комфорт',
-          status: 'Ключи в 2026',
-          apartments: '1 150 квартир',
-          chatUrl: 'https://t.me/example_river_quarter'
-        },
-        {
-          name: 'ЖК Маяк City',
-          district: 'Южный',
-          classType: 'Бизнес',
-          status: 'Строится',
-          apartments: '770 квартир',
-          chatUrl: 'https://t.me/example_mayak_city'
-        },
-        {
-          name: 'ЖК Зеленые Террасы',
-          district: 'Восточный',
-          classType: 'Комфорт',
-          status: 'Ключи в 2027',
-          apartments: '1 890 квартир',
-          chatUrl: 'https://t.me/example_green_terraces'
+          name: 'ЖК Солнечный Берег', area: 'САО', district: 'Приморский', developer: 'Пример Девелопмент',
+          status: 'Сдан', classType: 'Комфорт', chatUrl: 'https://t.me/example_sunny_coast'
         }
       ];
 
       const searchInput = document.getElementById('searchInput');
+      const areaFilter = document.getElementById('areaFilter');
       const districtFilter = document.getElementById('districtFilter');
-      const classFilter = document.getElementById('classFilter');
+      const developerFilter = document.getElementById('developerFilter');
       const statusFilter = document.getElementById('statusFilter');
       const catalog = document.getElementById('catalog');
       const resultsMeta = document.getElementById('resultsMeta');
       const cardTemplate = document.getElementById('cardTemplate');
 
-      const uniqueValues = (key) => [...new Set(complexes.map((item) => item[key]))].sort();
+      const selectConfig = [
+        { key: 'area', el: areaFilter },
+        { key: 'district', el: districtFilter },
+        { key: 'developer', el: developerFilter },
+        { key: 'status', el: statusFilter }
+      ];
 
-      const fillSelect = (select, values) => {
-        values.forEach((value) => {
-          const option = document.createElement('option');
-          option.value = value;
-          option.textContent = value;
-          select.append(option);
-        });
-      };
+      const uniqueValues = (items, key) => [...new Set(items.map((item) => item[key]).filter(Boolean))].sort();
+      const fillSelect = (select, values) => values.forEach((value) => {
+        const option = document.createElement('option');
+        option.value = value;
+        option.textContent = value;
+        select.append(option);
+      });
 
-      fillSelect(districtFilter, uniqueValues('district'));
-      fillSelect(classFilter, uniqueValues('classType'));
-      fillSelect(statusFilter, uniqueValues('status'));
+      const normalizeRecord = (record) => ({
+        name: record['ЖК'] || record['Название ЖК'] || record['Комплекс'] || '',
+        area: record['АО Москвы'] || record['АО'] || '',
+        district: record['Район / локация'] || record['Район'] || '',
+        developer: record['Застройщик'] || '',
+        status: record['Стадия'] || record['Статус'] || record['Срок сдачи'] || 'Не указано',
+        classType: record['Класс'] || record['Тип списка'] || 'Каталог',
+        chatUrl: record['Ссылка на чат'] || record['Ссылка исходная'] || ''
+      });
 
-      const matchesFilters = (item) => {
-        const query = searchInput.value.trim().toLowerCase();
+      const fetchComplexes = async () => {
+        try {
+          const response = await fetch(DATA_FILE, { cache: 'no-store' });
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          const data = await response.json();
+          if (!Array.isArray(data)) throw new Error('JSON is not array');
 
-        const byName = !query || item.name.toLowerCase().includes(query);
-        const byDistrict = !districtFilter.value || item.district === districtFilter.value;
-        const byClass = !classFilter.value || item.classType === classFilter.value;
-        const byStatus = !statusFilter.value || item.status === statusFilter.value;
+          const normalized = data
+            .map(normalizeRecord)
+            .filter((item) => item.name && item.chatUrl);
 
-        return byName && byDistrict && byClass && byStatus;
+          if (normalized.length === 0) throw new Error('No valid records in JSON');
+          resultsMeta.textContent = `Источник: ${DATA_FILE}`;
+          return normalized;
+        } catch (error) {
+          resultsMeta.textContent = `Не удалось загрузить ${DATA_FILE}, показаны тестовые данные.`;
+          return fallbackComplexes;
+        }
       };
 
       const createCard = (item) => {
         const node = cardTemplate.content.firstElementChild.cloneNode(true);
-
         node.querySelector('h2').textContent = item.name;
         node.querySelector('.badge').textContent = item.classType;
-
         const facts = node.querySelector('.card__facts');
-        [`Район: ${item.district}`, `Статус: ${item.status}`, `Объём: ${item.apartments}`].forEach(
-          (text) => {
-            const li = document.createElement('li');
-            li.textContent = text;
-            facts.append(li);
-          }
-        );
+
+        [
+          `АО: ${item.area || '—'}`,
+          `Район: ${item.district || '—'}`,
+          `Застройщик: ${item.developer || '—'}`,
+          `Статус: ${item.status || '—'}`
+        ].forEach((text) => {
+          const li = document.createElement('li');
+          li.textContent = text;
+          facts.append(li);
+        });
 
         const link = node.querySelector('.card__chat-link');
         link.href = item.chatUrl;
         link.setAttribute('aria-label', `Открыть чат ${item.name}`);
-
         return node;
       };
 
-      const render = () => {
-        const filtered = complexes.filter(matchesFilters);
-        catalog.replaceChildren();
-        resultsMeta.textContent = `Найдено: ${filtered.length}`;
+      const init = async () => {
+        const complexes = await fetchComplexes();
+        selectConfig.forEach(({ key, el }) => fillSelect(el, uniqueValues(complexes, key)));
 
-        if (!filtered.length) {
-          const empty = document.createElement('div');
-          empty.className = 'empty';
-          empty.textContent = 'По вашему запросу ничего не найдено. Попробуйте изменить фильтры.';
-          catalog.append(empty);
-          return;
-        }
+        const matchesFilters = (item) => {
+          const query = searchInput.value.trim().toLowerCase();
+          const byName = !query || item.name.toLowerCase().includes(query);
+          const byArea = !areaFilter.value || item.area === areaFilter.value;
+          const byDistrict = !districtFilter.value || item.district === districtFilter.value;
+          const byDeveloper = !developerFilter.value || item.developer === developerFilter.value;
+          const byStatus = !statusFilter.value || item.status === statusFilter.value;
+          return byName && byArea && byDistrict && byDeveloper && byStatus;
+        };
 
-        filtered.forEach((item) => {
-          catalog.append(createCard(item));
+        const render = () => {
+          const filtered = complexes.filter(matchesFilters);
+          catalog.replaceChildren();
+          resultsMeta.textContent = `Найдено: ${filtered.length}`;
+
+          if (!filtered.length) {
+            const empty = document.createElement('div');
+            empty.className = 'empty';
+            empty.textContent = 'По вашему запросу ничего не найдено. Попробуйте изменить фильтры.';
+            catalog.append(empty);
+            return;
+          }
+
+          filtered.forEach((item) => catalog.append(createCard(item)));
+        };
+
+        [searchInput, areaFilter, districtFilter, developerFilter, statusFilter].forEach((input) => {
+          input.addEventListener('input', render);
+          input.addEventListener('change', render);
         });
+
+        render();
       };
 
-      [searchInput, districtFilter, classFilter, statusFilter].forEach((input) => {
-        input.addEventListener('input', render);
-        input.addEventListener('change', render);
-      });
-
-      render();
+      init();
     </script>
   </body>
 </html>
